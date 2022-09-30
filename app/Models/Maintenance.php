@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Maintenance extends Model
 {
     use HasFactory;
+
+    public function documents(){
+        return $this->hasMany(Document::class);
+    }
 }

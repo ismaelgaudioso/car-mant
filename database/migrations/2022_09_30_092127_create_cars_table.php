@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('car_license');
             $table->dateTime('first_purchase_date', $precision = 0);
             $table->dateTime('purchase_date',$precision = 0);
-            $table->timestamps();
-        });
+            $table->timestamps();           
+
+        });        
     }
 
     /**

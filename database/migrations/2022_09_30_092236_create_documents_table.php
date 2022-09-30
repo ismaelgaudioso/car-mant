@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('desc');
             $table->string('url_file');
             $table->timestamps();
+
         });
     }
 

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     use HasFactory;
+
+    public function maintenances(){
+        return $this->hasMany(Maintenance::class);
+    }
+
+    public function documents(){
+        return $this->hasMany(Document::class);
+    }
 }

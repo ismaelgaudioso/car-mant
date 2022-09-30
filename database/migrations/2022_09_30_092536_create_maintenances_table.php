@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('maintenance_type',['periodic','extraordinary'])->default('periodic');
             $table->dateTime('maintenance_date');
             $table->string('price');
+            $table->foreignId('car_id')->references('id')->on('cars');
             $table->timestamps();
         });
     }
