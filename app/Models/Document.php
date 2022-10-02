@@ -10,7 +10,7 @@ class Document extends Model
     use HasFactory;
 
     public function cars(){
-        return $this->hasMany(Car::class);
+        return $this->belongsToMany(Car::class,'cars_documents','document_id','car_id');
     }
 
     public function insurances(){

@@ -14,6 +14,6 @@ class Car extends Model
     }
 
     public function documents(){
-        return $this->hasMany(Document::class);
+        return $this->belongsToMany(Document::class,'cars_documents','car_id','document_id');
     }
 }

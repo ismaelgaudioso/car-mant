@@ -14,6 +14,6 @@ class Insurance extends Model
     }
 
     public function documents(){
-        return $this->hasMany(Document::class);
+        return $this->belongsToMany(Document::class,'documents_insurances','insurance_id','document_id');
     }
 }
