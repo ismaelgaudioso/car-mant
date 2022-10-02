@@ -17,15 +17,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('car_id');
-            $table->foreign('car_id')
-                  ->references('id')
-                  ->on('cars')->onDelete('cascade');        
+            $table->unsignedBigInteger('car_id');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');        
             
-            $table->string('document_id');
-            $table->foreign('document_id')
-                  ->references('id')
-                  ->on('documents')->onDelete('cascade');
+            $table->unsignedBigInteger('document_id');
+            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
         });
     }
 

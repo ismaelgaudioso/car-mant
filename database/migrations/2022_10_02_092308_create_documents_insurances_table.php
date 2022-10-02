@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('insurance_id');
+            $table->unsignedBigInteger('insurance_id');
             $table->foreign('insurance_id')
                   ->references('id')
                   ->on('insurances')->onDelete('cascade');        
             
-            $table->string('document_id');
+            $table->unsignedBigInteger('document_id');
             $table->foreign('document_id')
                   ->references('id')
                   ->on('documents')->onDelete('cascade');

@@ -27,22 +27,24 @@ class CarTest extends TestCase
     }
 
     public function test_create_car(){
-
+        $response = $this->get('/car/create');
+        $response->assertStatus(200);
     }
 
-    public function test_store_car(){
+    /*public function test_store_car(){
 
-    }
+    }*/
 
     public function test_edit_car(){
-
+        $response = $this->get('/car/1/edit');
+        $response->assertStatus(200);
     }
 
-    public function test_update_car(){
+    /*public function test_update_car(){
 
     }
 
     public function test_destroy_car(){
 
-    }
+    }*/
 }

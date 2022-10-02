@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('maintenance_id');
+            $table->unsignedBigInteger('maintenance_id');
             $table->foreign('maintenance_id')
                   ->references('id')
                   ->on('maintenances')->onDelete('cascade');        
             
-            $table->string('document_id');
+            $table->unsignedBigInteger('document_id');
             $table->foreign('document_id')
                   ->references('id')
                   ->on('documents')->onDelete('cascade');
