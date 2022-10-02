@@ -30,6 +30,6 @@ Route::get('/dashboard', function () {
 
 Route::resource('car',CarController::class);
 Route::resource('maintenance',MaintenanceController::class);
-Route::resource('Insurance',InsuranceController::class);
+Route::resource('insurance',InsuranceController::class);
 
 require __DIR__.'/auth.php';
