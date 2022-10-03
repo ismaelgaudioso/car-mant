@@ -9,6 +9,8 @@ class Car extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["name","desc","car_license","first_purchase_date","purchase_date"];
+
     public function maintenances(){
         return $this->hasMany(Maintenance::class);
     }
