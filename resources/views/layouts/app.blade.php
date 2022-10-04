@@ -10,6 +10,7 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
         <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+        <script src="https://kit.fontawesome.com/faea0390ec.js" crossorigin="anonymous"></script>
 
         <!-- Scripts -->        
         @vite(['resources/css/app.css', 'resources/js/app.js'])

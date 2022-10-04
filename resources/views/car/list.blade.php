@@ -60,6 +60,24 @@
                             </thead>
 
                             <tbody class="bg-white">
+                            @foreach ($cars as $car)
+                                <tr>
+                                    <td> {{ $car->id }} </td>
+                                    <td> {{ $car->name }} </td>
+                                    <td> {{ subtr($car->desc,0,15) }} </td>
+                                    <td> {{ $car->car_license }} </td>
+                                    <td> {{ $car->first_purchase_date }} </td>
+                                    <td> {{ $car->purchase_date }} </td>
+                                    <td> </td>
+                                    <td> {{ $car->created_at }} </td>
+                                    <td> 
+                                        <a href=" {{ route('car.show',$car) }} "> <i class="fa-light fa-eye text-green-500"></i> </a>
+                                        <a href=" {{ route('car.edit',$car) }} "> <i class="fa-light fa-pen-to-square text-blue-500"></i> </a>
+                                        <a href=" {{ route('car.destroy',$car) }} "> <i class="fa-light fa-trash text-red-500"></i> </a>
+                                    </td>
+
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
