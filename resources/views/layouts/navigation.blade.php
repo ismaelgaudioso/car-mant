@@ -84,6 +84,15 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('car.index')" :active="request()->routeIs('car.*')">
+                {{ __('Cars') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('maintenance.index')" :active="request()->routeIs('maintenance.*')">
+                {{ __('Maintenances') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('insurance.index')" :active="request()->routeIs('insurance.*')">
+                {{ __('Insurances') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

@@ -3,33 +3,46 @@
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="min-w-0 flex-1">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Cars') }}
+                    {{ __('Add a car') }}
                 </h2>
             </div>
         </div>
     </x-slot>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-5 p-5">
-        
-        <div class="mb-4">
-            <h1 class="text-3xl font-bold">Create Car</h1>
-        </div>
 
         <div class="w-full px-6 py-4 bg-white rounded shadow-md ring-1 ring-gray-900/10">
             <form method="POST" action="{{ route('car.store') }}">
                 @csrf
-                <!-- Name -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700" for="title">
-                        {{ ucfirst(__('name')) }}
-                    </label>
 
-                    <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="name" placeholder="180" value="{{old('title')}}">
-                    @error('name')
-                    <span class="text-red-600 text-sm">
-                        {{ $message }}
-                    </span>
-                    @enderror
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Name -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="title">
+                            {{ ucfirst(__('name')) }}
+                        </label>
+
+                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="name" placeholder="180" value="{{old('title')}}">
+                        @error('name')
+                        <span class="text-red-600 text-sm">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+
+                    <!-- Car license -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700" for="title">
+                            {{ ucfirst(__('car license')) }}
+                        </label>
+
+                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="car_license" placeholder="180" value="{{old('title')}}">
+                        @error('car_license')
+                        <span class="text-red-600 text-sm">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
                 </div>
                 <!-- Description -->
                 <div class="mt-2">
@@ -44,46 +57,53 @@
                     </span>
                     @enderror
                 </div>
-                <!-- Car license -->
-                <div class="mt-2">
-                    <label class="block text-sm font-medium text-gray-700" for="title">
-                        {{ ucfirst(__('car license')) }}
-                    </label>
 
-                    <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="car_license" placeholder="180" value="{{old('title')}}">
-                    @error('car_license')
-                    <span class="text-red-600 text-sm">
-                        {{ $message }}
-                    </span>
-                    @enderror
-                </div>
-                <!-- First purchase date -->
-                <div class="mt-2">
-                    <label class="block text-sm font-medium text-gray-700" for="title">
-                        {{ ucfirst(__('first purchase date')) }}
-                    </label>
+                <div class="grid grid-cols-2 gap-4 mt-2">
+                    <div>
+                        <!-- First purchase date -->
+                        <div class="mt-2">
+                            <label class="block text-sm font-medium text-gray-700" for="title">
+                                {{ ucfirst(__('first purchase date')) }}
+                            </label>
 
-                    <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="first_purchase_date" placeholder="180" value="{{old('title')}}">
-                     @error('firs_purchase_date')
-                    <span class="text-red-600 text-sm">
-                        {{ $message }}
-                    </span>
-                    @enderror
-                </div>
-                <!-- Purchase date -->
-                <div class="mt-2">
-                    <label class="block text-sm font-medium text-gray-700" for="title">
-                        {{ ucfirst(__('Purchase date')) }}
-                    </label>
-                    <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="purchase_date" placeholder="180" value="{{old('title')}}">
-                    @error('purchase_date')
-                    <span class="text-red-600 text-sm">
-                        {{ $message }}
-                    </span>
-                    @enderror
-                </div>
+                            <div class="relative">
+                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <input datepicker datepicker-format="yyyy/mm/dd" type="text" name="purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                            </div>
+                            @error('firs_purchase_date')
+                            <span class="text-red-600 text-sm">
+                                {{ $message }}
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- Purchase date -->
+                    <div>
+                        <div class="mt-2">
+                            <label class="block text-sm font-medium text-gray-700" for="title">
+                                {{ ucfirst(__('Purchase date')) }}
+                            </label>
+                            <div class="relative">
+                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <input datepicker datepicker-format="yyyy/mm/dd" type="text" name="purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                            </div>
+                            @error('purchase_date')
+                            <span class="text-red-600 text-sm">
+                                {{ $message }}
+                            </span>
+                            @enderror
+                        </div>
 
-                
+                    </div>
+                </div>
 
 
                 <div class="flex items-center justify-start mt-4">
