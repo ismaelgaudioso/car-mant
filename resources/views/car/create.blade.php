@@ -18,10 +18,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     <!-- Name -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700" for="title">
-                            {{ ucfirst(__('name')) }}
-                        </label>
-
+                        <x-input-label for="name" :value="ucfirst(__('name'))" />
                         <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="name" placeholder="180" value="{{old('title')}}">
                         @error('name')
                         <span class="text-red-600 text-sm">
@@ -32,10 +29,7 @@
 
                     <!-- Car license -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700" for="title">
-                            {{ ucfirst(__('car license')) }}
-                        </label>
-
+                        <x-input-label for="car_license" :value="ucfirst(__('car license'))" />
                         <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="car_license" placeholder="180" value="{{old('title')}}">
                         @error('car_license')
                         <span class="text-red-600 text-sm">
@@ -46,10 +40,7 @@
                 </div>
                 <!-- Description -->
                 <div class="mt-2">
-                    <label class="block text-sm font-medium text-gray-700" for="title">
-                        {{ ucfirst(__('description')) }}
-                    </label>
-
+                    <x-input-label for="desc" :value="ucfirst(__('desc'))" />                    
                     <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="desc" placeholder="180" value="{{old('title')}}">
                     @error('desc')
                     <span class="text-red-600 text-sm">
@@ -62,10 +53,7 @@
                     <div>
                         <!-- First purchase date -->
                         <div class="mt-2">
-                            <label class="block text-sm font-medium text-gray-700" for="title">
-                                {{ ucfirst(__('first purchase date')) }}
-                            </label>
-
+                            <x-input-label for="first_purchase_date" :value="ucfirst(__('first purchase date'))" />
                             <div class="relative">
                                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -84,9 +72,7 @@
                     <!-- Purchase date -->
                     <div>
                         <div class="mt-2">
-                            <label class="block text-sm font-medium text-gray-700" for="title">
-                                {{ ucfirst(__('Purchase date')) }}
-                            </label>
+                            <x-input-label for="purchase_date" :value="ucfirst(__('purchase date'))" />
                             <div class="relative">
                                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
