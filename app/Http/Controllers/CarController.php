@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Car\StoreRequest;
 use App\Models\Car;
-use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
@@ -64,7 +63,7 @@ class CarController extends Controller
      * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(StoreRequest $request, Car $car)
     {
         $car->update($request->validated());
         return to_route("car.show",compact('car'))->with('status','Car updated.');

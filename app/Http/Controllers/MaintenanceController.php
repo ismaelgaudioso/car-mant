@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maintenance;
-use Illuminate\Http\Request;
+use App\Http\Requests\Car\StoreRequest;
 
 class MaintenanceController extends Controller
 {
@@ -14,7 +14,8 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-        //
+        $maintenances = Maintenance::paginate(10);
+        return view('maintenance.list',compact('maintenances'));
     }
 
     /**
@@ -24,7 +25,7 @@ class MaintenanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('maintenance.create');
     }
 
     /**
@@ -33,9 +34,10 @@ class MaintenanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        Car::create($request->validated());
+        return to_route("maintenance.index")->with('status','Maintenance added.');
     }
 
     /**
@@ -46,7 +48,7 @@ class MaintenanceController extends Controller
      */
     public function show(Maintenance $maintenance)
     {
-        //
+        return view("maintenance.show",compact('maintenance'));
     }
 
     /**
@@ -57,7 +59,7 @@ class MaintenanceController extends Controller
      */
     public function edit(Maintenance $maintenance)
     {
-        //
+        return view("maintenance.edit",compact('maintenance'));
     }
 
     /**
@@ -67,9 +69,10 @@ class MaintenanceController extends Controller
      * @param  \App\Models\Maintenance  $maintenance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Maintenance $maintenance)
+    public function update(StoreRequest $request, Maintenance $maintenance)
     {
-        //
+        $maintenance->update($request->validated());
+        return to_route("maintenance.show",compact('maintenance'))->with('status','Maintenance updated.');
     }
 
     /**
@@ -80,6 +83,7 @@ class MaintenanceController extends Controller
      */
     public function destroy(Maintenance $maintenance)
     {
-        //
+        $maintenance->delete();
+        return to_route("maintenance.index")->with('status',"Maintenance deleted.");
     }
 }
