@@ -42,8 +42,8 @@ class CarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Car $car)
-    {
-        //
+    {        
+        return view("car.show",compact('car'));
     }
 
     /**
@@ -54,7 +54,7 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        return view("car.edit",compact('car'));
     }
 
     /**

@@ -16,6 +16,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.2.0",
         "flowbite": "^1.5.3",
         "flowbite-datepicker": "^1.2.2"
     }

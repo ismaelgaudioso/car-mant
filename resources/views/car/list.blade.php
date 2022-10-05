@@ -27,7 +27,7 @@
             <div class="flex flex-col m-2">
                 <div class="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                     <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                        <table class="min-w-full">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead>
                                 <tr>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
@@ -60,24 +60,24 @@
                             </thead>
 
                             <tbody class="bg-white">
-                            @foreach ($cars as $car)
-                                <tr>
-                                    <td> {{ $car->id }} </td>
-                                    <td> {{ $car->name }} </td>
-                                    <td> {{ subtr($car->desc,0,15) }} </td>
-                                    <td> {{ $car->car_license }} </td>
-                                    <td> {{ $car->first_purchase_date }} </td>
-                                    <td> {{ $car->purchase_date }} </td>
-                                    <td> </td>
-                                    <td> {{ $car->created_at }} </td>
-                                    <td> 
-                                        <a href=" {{ route('car.show',$car) }} "> <i class="fa-light fa-eye text-green-500"></i> </a>
-                                        <a href=" {{ route('car.edit',$car) }} "> <i class="fa-light fa-pen-to-square text-blue-500"></i> </a>
-                                        <a href=" {{ route('car.destroy',$car) }} "> <i class="fa-light fa-trash text-red-500"></i> </a>
+                                @foreach ($cars as $car)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="py-4 px-6"> {{ $car->id }} </td>
+                                    <td class="py-4 px-6"> {{ $car->name }} </td>
+                                    <td class="py-4 px-6"> {{ substr($car->desc,0,15) }} </td>
+                                    <td class="py-4 px-6"> {{ $car->car_license }} </td>
+                                    <td class="py-4 px-6"> {{ date("d/m/Y", strtotime($car->first_purchase_date )) }} </td>
+                                    <td class="py-4 px-6"> {{ date("d/m/Y", strtotime($car->purchase_date )) }} </td>
+                                    <td class="py-4 px-6"> </td>
+                                    <td class="py-4 px-6 text-xs"> {{ date("d/m/Y H:m", strtotime($car->created_at )) }} </td>
+                                    <td class="py-4 px-6">
+                                        <a href=" {{ route('car.show',$car) }} "> <i class="fas fa-light fa-eye text-green-500"></i> </a>
+                                        <a href=" {{ route('car.edit',$car) }} "> <i class=" fas fa-light fa-pen-to-square text-blue-500"></i> </a>
+                                        <a href=" {{ route('car.destroy',$car) }} "> <i class="fas fa-light fa-trash text-red-500"></i> </a>
                                     </td>
 
                                 </tr>
-                            @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
