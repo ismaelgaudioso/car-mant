@@ -32,7 +32,7 @@ class CarController extends Controller
     public function store(StoreRequest $request)
     {
         Car::create($request->validated());
-        return to_route("car.index");
+        return to_route("car.index")->with('status','Car added.');
     }
 
     /**
@@ -66,7 +66,8 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        $car->update($request->validated());
+        return to_route("car.show",compact('car'))->with('status','Car updated.');
     }
 
     /**
@@ -77,6 +78,7 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car->delete();
+        return to_route("car.index")->with('status',"Car deleted.");
     }
 }
