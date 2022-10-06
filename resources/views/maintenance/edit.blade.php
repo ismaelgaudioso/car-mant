@@ -27,11 +27,14 @@
                         @enderror
                     </div>
 
-                    <!-- Car id -->
+                    <!-- Cars -->
                     <div>
-                        <x-input-label for="car_id" :value="ucfirst(__('car license'))" />
-                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="car_id" placeholder="180" value="{{old('car_id')}}">
-                        @error('car_id')
+                        <x-input-label for="car_id" :value="ucfirst(__('cars'))" />
+                        <select name="car_id" class="bg-gray-50 mt-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @foreach ($cars as $car)
+                            <option value="{{$car->id}}" {{ $maintenance->car_id == $car->id ? "selected" : "" }} class=""> {{$car->name}}</option>
+                            @endforeach
+                        </select>@error('car_id')
                         <span class="text-red-600 text-sm">
                             {{ $message }}
                         </span>
@@ -41,7 +44,10 @@
                     <!-- Maintenance type -->
                     <div>
                         <x-input-label for="maintenance_type" :value="ucfirst(__('maintenance type'))" />
-                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="maintenance_type" placeholder="180" value="{{$maintenance_type}}">
+                        <select name="maintenance_type" class="bg-gray-50 mt-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="periodic" {{ $maintenance->maintenance_type == "periodic" ? "selected" : "" }} >{{ucfirst(__("periodic"))}}</option>
+                            <option value="extraordinary" {{ $maintenance->maintenance_type == "extraordinary" ? "selected" : "" }}>{{ucfirst(__("extraordinary"))}}</option>
+                        </select>
                         @error('maintenance_type')
                         <span class="text-red-600 text-sm">
                             {{ $message }}

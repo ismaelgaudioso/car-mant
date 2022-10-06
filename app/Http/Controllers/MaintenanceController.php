@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maintenance;
-use App\Http\Requests\Car\StoreRequest;
+use App\Models\Car;
+use App\Http\Requests\Maintenance\StoreRequest;
 
 class MaintenanceController extends Controller
 {
@@ -14,7 +15,10 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-        $maintenances = Maintenance::paginate(10);
+        $maintenances = Maintenance::join('cars', 'cars.id', '=', 'maintenances.car_id')
+            ->select("maintenances.*","cars.name as car")
+            ->orderBy("maintenances.maintenance_date","desc")
+            ->paginate(10);
         return view('maintenance.list',compact('maintenances'));
     }
 
@@ -25,7 +29,8 @@ class MaintenanceController extends Controller
      */
     public function create()
     {
-        return view('maintenance.create');
+        $cars = Car::all();
+        return view('maintenance.create',compact('cars'));
     }
 
     /**
@@ -36,7 +41,7 @@ class MaintenanceController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Car::create($request->validated());
+        Maintenance::create($request->validated());
         return to_route("maintenance.index")->with('status','Maintenance added.');
     }
 
@@ -48,7 +53,8 @@ class MaintenanceController extends Controller
      */
     public function show(Maintenance $maintenance)
     {
-        return view("maintenance.show",compact('maintenance'));
+        $car = Car::find($maintenance->car_id);
+        return view("maintenance.show",compact('maintenance','car'));
     }
 
     /**
@@ -59,7 +65,8 @@ class MaintenanceController extends Controller
      */
     public function edit(Maintenance $maintenance)
     {
-        return view("maintenance.edit",compact('maintenance'));
+        $cars = Car::all();
+        return view("maintenance.edit",compact('maintenance','cars'));
     }
 
     /**
