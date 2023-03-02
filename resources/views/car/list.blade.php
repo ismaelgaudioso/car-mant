@@ -1,4 +1,14 @@
 <x-app-layout>
+
+    <x-slot name="scriptjs">
+        <script>
+            function clickOnRow(id) {
+                alert("hola " + id);
+            }
+
+        </script>
+    </x-slot>
+
     <x-slot name="header">
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="min-w-0 flex-1">
@@ -42,34 +52,22 @@
                                         {{ __('Car license plate') }}
                                     </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                        {{ __('first purchase date') }}
-                                    </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                        {{ __('purchase date') }}
-                                    </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         {{ __('documents') }}
-                                    </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                        {{ __('Created at') }}
-                                    </th>
+                                    </th>                                   
                                     <th class="px-6 py-3 text-sm text-left text-gray-500 border-b border-gray-200 bg-gray-50" colspan="2">
                                         {{ __('Actions') }}
                                     </th>
                                 </tr>
                             </thead>
 
-                            <tbody class="bg-white">
+                            <tbody class="bg-white" x-data="">
                                 @foreach ($cars as $car)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="py-4 px-6"> {{ $car->id }} </td>
-                                    <td class="py-4 px-6"> {{ $car->name }} </td>
-                                    <td class="py-4 px-6"> {{ substr($car->desc,0,15) }} </td>
-                                    <td class="py-4 px-6"> {{ $car->car_license }} </td>
-                                    <td class="py-4 px-6"> {{ date("d/m/Y", strtotime($car->first_purchase_date )) }} </td>
-                                    <td class="py-4 px-6"> {{ date("d/m/Y", strtotime($car->purchase_date )) }} </td>
+                                <tr x-data=" { carId: {{$car->id}} } " class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
+                                    <td @click="clickOnRow(carId)" class="py-4 px-6 cursor-pointer"> {{ $car->id }} </td>
+                                    <td @click="clickOnRow(carId)" class="py-4 px-6 cursor-pointer"> {{ $car->name }} </td>
+                                    <td @click="clickOnRow(carId)" class="py-4 px-6 cursor-pointer"> {{ substr($car->desc,0,15) }} </td>
+                                    <td @click="clickOnRow(carId)" class="py-4 px-6 cursor-pointer"> {{ $car->car_license }} </td>
                                     <td class="py-4 px-6"> </td>
-                                    <td class="py-4 px-6 text-xs"> {{ date("d/m/Y H:m", strtotime($car->created_at )) }} </td>
                                     <td class="py-4 px-6">
                                         <a href=" {{ route('car.show',$car) }} "> <i class="fas fa-light fa-eye text-green-500"></i> </a>
                                         <a href=" {{ route('car.edit',$car) }} "> <i class=" fas fa-light fa-pen-to-square text-blue-500"></i> </a>

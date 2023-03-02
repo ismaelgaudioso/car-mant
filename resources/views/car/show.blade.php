@@ -3,7 +3,7 @@
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="min-w-0 flex-1">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ $car->name }}
+                    <a href="{{ route('car.index') }}" class="hover:text-gray-100 underline" >{{ __('Cars') }}</a> > {{ $car->name }}
                 </h2>
             </div>
         </div>
@@ -33,7 +33,11 @@
                 <!-- Actions -->
                 <div class="px-4 py-5">
                     <a href="{{ route('car.edit',$car) }}" class="mx-5 px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-blue-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">{{ ucfirst(__('edit')) }}</a>
-                    <a href="{{ route('car.destroy',$car) }}" class="mx-5 px-6 py-3 text-blue-100 no-underline bg-red-500 rounded hover:bg-red-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">{{ ucfirst(__('delete')) }}</a>
+                    <form class="inline" action="{{ route('car.destroy',$car) }}" method="post">
+                        @method("DELETE")
+                        @csrf    
+                        <button type="submit" class="mx-5 px-6 py-3 text-blue-100 no-underline bg-red-500 rounded hover:bg-red-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">{{ ucfirst(__('delete')) }}</button>
+                    </form>
                 </div>
             </div>
 
