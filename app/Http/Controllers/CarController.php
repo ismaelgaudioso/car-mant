@@ -31,7 +31,7 @@ class CarController extends Controller
     public function store(StoreRequest $request)
     {
         Car::create($request->validated());
-        return to_route("car.index")->with('status','Car added.');
+        return to_route('car.index')->with('status','Car added.');
     }
 
     /**

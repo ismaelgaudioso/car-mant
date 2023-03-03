@@ -3,7 +3,7 @@
     <x-slot name="scriptjs">
         <script>
             function clickOnRow(id) {
-                alert("hola " + id);
+                window.location.href = "{{ route('car.index') }}/" + id;
             }
 
         </script>
@@ -54,7 +54,7 @@
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         {{ __('documents') }}
                                     </th>                                   
-                                    <th class="px-6 py-3 text-sm text-left text-gray-500 border-b border-gray-200 bg-gray-50" colspan="2">
+                                    <th class="text-center px-6 py-3 text-sm text-left text-gray-500 border-b border-gray-200 bg-gray-50">
                                         {{ __('Actions') }}
                                     </th>
                                 </tr>
@@ -68,10 +68,12 @@
                                     <td @click="clickOnRow(carId)" class="py-4 px-6 cursor-pointer"> {{ substr($car->desc,0,15) }} </td>
                                     <td @click="clickOnRow(carId)" class="py-4 px-6 cursor-pointer"> {{ $car->car_license }} </td>
                                     <td class="py-4 px-6"> </td>
-                                    <td class="py-4 px-6">
-                                        <a href=" {{ route('car.show',$car) }} "> <i class="fas fa-light fa-eye text-green-500"></i> </a>
-                                        <a href=" {{ route('car.edit',$car) }} "> <i class=" fas fa-light fa-pen-to-square text-blue-500"></i> </a>
-                                        <a href=" {{ route('car.destroy',$car) }} "> <i class="fas fa-light fa-trash text-red-500"></i> </a>
+                                    <td class="py-4 px-6 text-center">      
+                                        <form class="inline" action="{{ route('car.destroy',$car) }}" method="post" onsubmit="if(!confirm('Do you really want to delete this car?')){return false;}">
+                                            @method("DELETE")
+                                            @csrf                                     
+                                            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"> <i class="fas fa-light fa-trash text-red-500"></i> </button>
+                                        </form>
                                     </td>
 
                                 </tr>
@@ -83,6 +85,8 @@
             </div>
         </div>
     </div>
+
+    
 
 
 </x-app-layout>

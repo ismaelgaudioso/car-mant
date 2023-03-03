@@ -24,8 +24,8 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|min:5|max:180",
-            "desc" => "required|min:5|max:180",
+            "name" => "required|min:3|max:180",
+            "desc" => "required|min:3|max:180",
             "car_license" => "required|min:7|max:10",
             "first_purchase_date" => "required|date",
             "purchase_date" => "required|date"

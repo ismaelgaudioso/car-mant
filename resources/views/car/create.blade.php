@@ -11,6 +11,25 @@
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-5 p-5">
 
+        <div class="container max-w-6xl mx-auto mt-2 mb-2">
+            @if (session()->has('message'))
+            <div class="p-3 rounded bg-green-500 text-green-100 my-2">
+                {{ session('message') }}
+            </div>
+            @endif
+
+            @if($errors->any())
+            <div class="p-3 rounded bg-red-500 text-red-100 my-2">
+                <ul>
+                    @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+        </div>
+
         <div class="w-full px-6 py-4 bg-white rounded shadow-md ring-1 ring-gray-900/10">
             <form method="POST" action="{{ route('car.store') }}">
                 @csrf
@@ -19,7 +38,7 @@
                     <!-- Name -->
                     <div>
                         <x-input-label for="name" :value="ucfirst(__('name'))" />
-                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="name" placeholder="180" value="{{old('title')}}">
+                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="name" placeholder="{{__('Car name')}}" value="{{old('title')}}">
                         @error('name')
                         <span class="text-red-600 text-sm">
                             {{ $message }}
@@ -30,7 +49,7 @@
                     <!-- Car license -->
                     <div>
                         <x-input-label for="car_license" :value="ucfirst(__('car license'))" />
-                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="car_license" placeholder="180" value="{{old('title')}}">
+                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="car_license" placeholder="{{__('Car license plate')}}" value="{{old('title')}}">
                         @error('car_license')
                         <span class="text-red-600 text-sm">
                             {{ $message }}
@@ -41,7 +60,7 @@
                 <!-- Description -->
                 <div class="mt-2">
                     <x-input-label for="desc" :value="ucfirst(__('desc'))" />                    
-                    <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="desc" placeholder="180" value="{{old('title')}}">
+                    <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="desc" placeholder="{{__('Car description')}}" value="{{old('title')}}">
                     @error('desc')
                     <span class="text-red-600 text-sm">
                         {{ $message }}
@@ -60,7 +79,7 @@
                                         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input datepicker datepicker-format="yyyy/mm/dd" type="text" name="purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                                <input datepicker datepicker-format="yyyy/mm/dd" name="first_purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{__('Select date')}}">
                             </div>
                             @error('firs_purchase_date')
                             <span class="text-red-600 text-sm">
@@ -79,7 +98,7 @@
                                         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input datepicker datepicker-format="yyyy/mm/dd" type="text" name="purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                                <input datepicker datepicker-format="yyyy/mm/dd" name="purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{__('Select date')}}">
                             </div>
                             @error('purchase_date')
                             <span class="text-red-600 text-sm">
