@@ -114,7 +114,7 @@
 
                 <div class="flex items-center justify-start mt-4">
                     <button type="submit" class="inline-flex items-center px-6 py-2 text-sm font-semibold rounded-md text-sky-100 bg-sky-500 hover:bg-sky-700 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
-                        Save
+                        {{ ucfirst(__('create')) }}
                     </button>
                 </div>
 

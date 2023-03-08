@@ -10,9 +10,13 @@
     </x-slot>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-5 p-5">
-
+        <div class="flex flex-row">  
+                <div class="md:basis-1/2 sm:basis-1 text-gray-400 px-4 py-2">ID: <strong>{{ $maintenance->id}}</strong></div>
+                <div class="md:basis-1/2 sm:basis-1 text-gray-400 px-4 py-2">{{__('Modified at')}}: <strong>{{ $maintenance->updated_at}}</strong></div> 
+        </div>
         <div class="w-full px-6 py-4 bg-white rounded shadow-md ring-1 ring-gray-900/10">
-        <form method="POST" action="{{ route('car.store') }}">
+        <form method="POST" action="{{ route('maintenance.update',$maintenance->id) }}">
+                @method("PATCH")
                 @csrf
 
                 <div class="grid grid-cols-2 gap-4">
@@ -29,7 +33,7 @@
 
                     <!-- Cars -->
                     <div>
-                        <x-input-label for="car_id" :value="ucfirst(__('cars'))" />
+                        <x-input-label for="car_id" :value="ucfirst(__('car'))" />
                         <select name="car_id" class="bg-gray-50 mt-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @foreach ($cars as $car)
                             <option value="{{$car->id}}" {{ $maintenance->car_id == $car->id ? "selected" : "" }} class=""> {{$car->name}}</option>
@@ -74,7 +78,7 @@
                                         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input datepicker datepicker-format="yyyy/mm/dd" type="text" name="maintenance_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                                <input datepicker datepicker-format="yyyy/mm/dd" data-date="{{ date('Y/m/d', strtotime($maintenance->maintenance_date )) }}" value="{{ date('Y/m/d', strtotime($maintenance->maintenance_date )) }}" name="maintenance_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                             </div>
                             @error('maintenance_date')
                             <span class="text-red-600 text-sm">
