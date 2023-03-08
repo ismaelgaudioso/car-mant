@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Car\StoreRequest;
+use App\Http\Requests\Car\PutRequest;
 use App\Models\Car;
 
 class CarController extends Controller
