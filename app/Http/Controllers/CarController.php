@@ -63,7 +63,7 @@ class CarController extends Controller
      * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, Car $car)
+    public function update(PutRequest $request, Car $car)
     {
         $car->update($request->validated());
         return to_route("car.show",compact('car'))->with('status','Car updated.');
