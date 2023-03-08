@@ -49,8 +49,13 @@
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         {{ __('car') }}
                                     </th>
+
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         {{ __('details') }}
+                                    </th>
+
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                        {{ __('Kms.') }}
                                     </th>
                                     
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
@@ -81,7 +86,8 @@
                                     @endif
                                     </td>
                                     <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ $maintenance->car }} </td>
-                                    <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ substr($maintenance->details,0,20) }} </td>                                    
+                                    <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ substr($maintenance->details,0,20) }} </td>
+                                    <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ $maintenance->kilometers }} </td>                            
                                     <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ date("d/m/Y", strtotime($maintenance->maintenance_date )) }} </td>
                                     <td @click="clickOnRow(maintenanceId)" class="py-4 px-4 cursor-pointer"> {{ $maintenance->price }}€</td>
                                     <td class="py-4 px-6"> </td>

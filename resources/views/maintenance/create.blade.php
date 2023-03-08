@@ -20,7 +20,7 @@
                     <!-- Details -->
                     <div>
                         <x-input-label for="details" :value="ucfirst(__('details'))" />
-                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="details" placeholder="180" value="{{old('details')}}">
+                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="details" placeholder="{{ucfirst(__('details'))}}" value="{{old('details')}}">
                         @error('details')
                         <span class="text-red-600 text-sm">
                             {{ $message }}
@@ -36,7 +36,7 @@
                             <option value="{{$car->id}}">{{$car->name}}</option>
                             @endforeach
                         </select>
-                        @error('cars')
+                        @error('car_id')
                         <span class="text-red-600 text-sm">
                             {{ $message }}
                         </span>
@@ -60,8 +60,18 @@
                     <!-- Price -->
                     <div>
                         <x-input-label for="price" :value="ucfirst(__('price'))" />
-                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="price" placeholder="180" value="{{old('price')}}">
-                        @error('maintenance_type')
+                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="price" placeholder="0" value="{{old('price')}}">
+                        @error('price')
+                        <span class="text-red-600 text-sm">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <x-input-label for="kilometers" :value="ucfirst(__('kilometers'))" />
+                        <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="kilometers" placeholder="{{ucfirst(__('kilometers'))}}" value="{{old('kilometers')}}">
+                        @error('kilometers')
                         <span class="text-red-600 text-sm">
                             {{ $message }}
                         </span>

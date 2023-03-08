@@ -29,6 +29,7 @@ class StoreRequest extends FormRequest
             "price" => "required|min:2|max:10",
             "maintenance_date" => "required|date",
             "car_id" => "required|integer",
+            "kilometers" => "required|integer"
         ];
     }
 }

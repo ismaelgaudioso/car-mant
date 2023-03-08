@@ -37,6 +37,10 @@
                     <strong> {{ ucfirst(__('price')) }}:</strong>
                     {{ $maintenance->price }}€
                 </div>
+                <div class="md:basis-1/2 sm:basis-1 px-4 py-5">
+                    <strong> {{ ucfirst(__('kilometers')) }}:</strong>
+                    {{ $maintenance->kilometers }} Kms.
+                </div>
             </div>
 
             <div class="flex flex-row">
