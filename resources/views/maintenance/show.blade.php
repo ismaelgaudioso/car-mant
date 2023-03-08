@@ -3,7 +3,7 @@
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="min-w-0 flex-1">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ ucfirst(__('maintenance')) }} {{__('for')}} {{date("d/m/Y", strtotime($maintenance->maintenance_date )) }}
+                    <strong>{{ucfirst($car->name)}}:</strong> {{ ucfirst(__('maintenance')) }} {{$maintenance->kilometers}} kms. ({{date("d/m/Y", strtotime($maintenance->maintenance_date )) }})
                 </h2>
             </div>
         </div>
