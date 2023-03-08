@@ -1,4 +1,15 @@
 <x-app-layout>
+
+    <x-slot name="scriptjs">
+        <script>
+            function clickOnRow(id) {
+                window.location.href = "{{ route('maintenance.index') }}/" + id;
+            }
+
+        </script>
+    </x-slot>
+
+
     <x-slot name="header">
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="min-w-0 flex-1">
@@ -30,50 +41,56 @@
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         ID</th>
+                                    <th class="px-3 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                        {{ __('type') }}
+                                    </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         {{ __('car') }}
                                     </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         {{ __('details') }}
                                     </th>
+                                    
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                        {{ __('maintenance type') }}
+                                        {{ __('date') }}
                                     </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                        {{ __('maintenance date') }}
-                                    </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    <th class="px-4 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         {{ __('price') }}
                                     </th>                                    
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                         {{ __('documents') }}
-                                    </th>
-                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                        {{ __('Created at') }}
-                                    </th>
-                                    <th class="px-6 py-3 text-sm text-left text-gray-500 border-b border-gray-200 bg-gray-50" colspan="2">
+                                    </th>                                    
+                                    <th class="px-6 py-3 text-sm text-center text-gray-500 border-b border-gray-200 bg-gray-50" colspan="2">
                                         {{ __('Actions') }}
                                     </th>
                                 </tr>
                             </thead>
 
-                            <tbody class="bg-white">
+                            <tbody class="bg-white" x-data="">
                                 @foreach ($maintenances as $maintenance)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="py-4 px-6"> {{ $maintenance->id }} </td>
-                                    <td class="py-4 px-6"> {{ $maintenance->car }} </td>
-                                    <td class="py-4 px-6"> {{ substr($maintenance->details,0,20) }} </td>
-                                    <td class="py-4 px-6"> {{ $maintenance->maintenance_type}} </td>
-                                    <td class="py-4 px-6"> {{ date("d/m/Y", strtotime($maintenance->maintenance_date )) }} </td>
-                                    <td class="py-4 px-6"> {{ $maintenance->price }} €</td>
+                                <tr x-data=" { maintenanceId: {{$maintenance->id}} } " class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
+                                    <td @click="clickOnRow(maintenanceId)" class="py-4 px-3 cursor-pointer"> {{ $maintenance->id }} </td>
+                                    <td @click="clickOnRow(maintenanceId)" class="py-4 px-3 cursor-pointer"> 
+                                    <span class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded border dark:bg-gray-700
+                                    @if($maintenance->maintenance_type == "periodic")
+                                        bg-blue-400 text-white font-bold dark:text-blue-400  border-blue-400">P</span>
+                                    @else
+                                        bg-red-400 text-white font-bold dark:text-blue-400  border-red-400">E</span>
+                                    @endif
+                                    </td>
+                                    <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ $maintenance->car }} </td>
+                                    <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ substr($maintenance->details,0,20) }} </td>                                    
+                                    <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ date("d/m/Y", strtotime($maintenance->maintenance_date )) }} </td>
+                                    <td @click="clickOnRow(maintenanceId)" class="py-4 px-4 cursor-pointer"> {{ $maintenance->price }}€</td>
                                     <td class="py-4 px-6"> </td>
-                                    <td class="py-4 px-6 text-xs"> {{ date("d/m/Y H:m", strtotime($maintenance->created_at )) }} </td>
-                                    <td class="py-4 px-6">
-                                        <a href=" {{ route('maintenance.show',$maintenance) }} "> <i class="fas fa-light fa-eye text-green-500"></i> </a>
-                                        <a href=" {{ route('maintenance.edit',$maintenance) }} "> <i class=" fas fa-light fa-pen-to-square text-blue-500"></i> </a>
-                                        <a href=" {{ route('maintenance.destroy',$maintenance) }} "> <i class="fas fa-light fa-trash text-red-500"></i> </a>
+                                    <td class="py-4 px-6 text-center">
+                                        <form class="inline" action="{{ route('maintenance.destroy',$maintenance) }}" method="post" onsubmit="if(!confirm('Do you really want to delete this maintenance?')){return false;}">
+                                            @method("DELETE")
+                                            @csrf                                     
+                                            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"> <i class="fas fa-light fa-trash text-red-500"></i> </button>
+                                        </form>
                                     </td>
 
                                 </tr>

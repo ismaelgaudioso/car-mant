@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Maintenance;
 use App\Models\Car;
 use App\Http\Requests\Maintenance\StoreRequest;
+use App\Http\Requests\Maintenance\PutRequest;
 
 class MaintenanceController extends Controller
 {
@@ -76,7 +77,7 @@ class MaintenanceController extends Controller
      * @param  \App\Models\Maintenance  $maintenance
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, Maintenance $maintenance)
+    public function update(PutRequest $request, Maintenance $maintenance)
     {
         $maintenance->update($request->validated());
         return to_route("maintenance.show",compact('maintenance'))->with('status','Maintenance updated.');
