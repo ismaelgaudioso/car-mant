@@ -3,6 +3,7 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +32,7 @@ Route::get('/dashboard', function () {
 Route::resource('car',CarController::class);
 Route::resource('maintenance',MaintenanceController::class);
 Route::resource('insurance',InsuranceController::class);
+
+Route::post('upload', UploadController::class)->name('upload');
 
 require __DIR__.'/auth.php';

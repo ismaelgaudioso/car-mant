@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('car', App\Http\Controllers\Api\CarController::class)->except(["create",
+"edit"]);
+Route::resource('maintenance', App\Http\Controllers\Api\MaintenanceController::class)->except(["create",
+"edit"]);
