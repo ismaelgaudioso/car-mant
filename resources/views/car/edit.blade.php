@@ -1,4 +1,12 @@
 <x-app-layout>
+    <x-slot name="scriptjs">
+        <script>
+            function clickOnUploadButton() {
+                alert("hola");
+            }
+        </script>
+    </x-slot>
+
     <x-slot name="header">
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="min-w-0 flex-1">
@@ -11,13 +19,13 @@
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-5 p-5">
 
-        <div class="flex flex-row">  
-                <div class="md:basis-1/2 sm:basis-1 text-gray-400 px-4 py-2">ID: <strong>{{ $car->id}}</strong></div>
-                <div class="md:basis-1/2 sm:basis-1 text-gray-400 px-4 py-2">{{__('Modified at')}}: <strong>{{ $car->updated_at}}</strong></div> 
+        <div class="flex flex-row">
+            <div class="md:basis-1/2 sm:basis-1 text-gray-400 px-4 py-2">ID: <strong>{{ $car->id}}</strong></div>
+            <div class="md:basis-1/2 sm:basis-1 text-gray-400 px-4 py-2">{{__('Modified at')}}: <strong>{{ $car->updated_at}}</strong></div>
         </div>
 
         <div class="w-full px-6 py-4 bg-white rounded shadow-md ring-1 ring-gray-900/10">
-            
+
             <form method="POST" action="{{ route('car.update',$car->id) }}">
                 @method("PATCH")
                 @csrf
@@ -47,7 +55,7 @@
                 </div>
                 <!-- Description -->
                 <div class="mt-2">
-                    <x-input-label for="desc" :value="ucfirst(__('desc'))" />                    
+                    <x-input-label for="desc" :value="ucfirst(__('desc'))" />
                     <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="desc" placeholder="180" value="{{ $car->desc }}">
                     @error('desc')
                     <span class="text-red-600 text-sm">
@@ -88,7 +96,7 @@
                                     </svg>
                                 </div>
                                 <input datepicker datepicker-format="yyyy/mm/dd" data-date="{{ date('Y/m/d', strtotime($car->purchase_date )) }}" name="purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" value="
-                                {{ date('Y/m/d', strtotime($car->purchase_date )) }}"/>
+                                {{ date('Y/m/d', strtotime($car->purchase_date )) }}" />
                             </div>
                             @error('purchase_date')
                             <span class="text-red-600 text-sm">
@@ -101,32 +109,30 @@
                 </div>
 
                 <!-- Upload files -->
-                <div class="mt-8 mb-8">    
-                    <x-input-label for="purchase_date" :value="ucfirst(__('upload Files'))" />            
-                    <div class="flex items-center justify-center w-full mt-2">
-                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">{{ __('Click to upload') }}</span> {{__('or')}} {{__('drag and drop')}}</p>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('PDF, PNG, JPG or GIF')}}</p>
-                            </div>
-                            <input id="dropzone-file" type="file" class="hidden" />
-                        </label>
-                    </div> 
+                <div class="flex mt-4 mb-4">
+                    <div class="flex-auto">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                    </div>
+                    <div class="mt-5 flex-auto"  x-data="">
+                        <button @click="clickOnUploadButton()" class="mx-5 px-6 py-3 text-white-800 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
+                            Subir
+                        </button>
+                    </div>
                 </div>
 
 
-                <div class="flex items-center justify-start mt-4">
-                    <a  href="{{ route('car.index')}}" class="mx-5 px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-blue-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
+                    <div class="flex items-center justify-start mt-4">
+                    <a href="{{ route('car.index')}}" class="mx-5 px-6 py-3 text-white-800 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-blue-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
                         Cancel
                     </a>
-                    <button type="submit" class="mx-5 px-6 py-3 text-blue-100 no-underline bg-red-500 rounded hover:bg-red-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
+                    <button type="submit" class="mx-5 px-6 py-3 text-white-800 no-underline bg-red-500 rounded hover:bg-red-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
                         Save
                     </button>
                 </div>
 
                 <div class="flex items-center justify-start mt-4">
-                    
+
                 </div>
 
             </form>

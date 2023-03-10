@@ -18,6 +18,8 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.2.0",
         "flowbite": "^1.6.3",
-        "flowbite-datepicker": "^1.2.2"
+        "flowbite-datepicker": "^1.2.2",
+        "jquery": "^3.6.4",
+        "vue": "^3.2.36"
     }
 }

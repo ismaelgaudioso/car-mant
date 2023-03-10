@@ -18,7 +18,7 @@ class Document extends Model
     }
 
     public function maintenances(){
-        return $this->hasMany(Maintenance::class);
+        return $this->belongsToMany(Maintenance::class,'documents_maintenances','document_id','maintenance_id');
     }
 
 }

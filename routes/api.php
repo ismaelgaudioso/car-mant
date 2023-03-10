@@ -22,3 +22,4 @@ Route::resource('car', App\Http\Controllers\Api\CarController::class)->except(["
 "edit"]);
 Route::resource('maintenance', App\Http\Controllers\Api\MaintenanceController::class)->except(["create",
 "edit"]);
+

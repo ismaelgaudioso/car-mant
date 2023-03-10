@@ -15,9 +15,17 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+           
             $table->string('name');
-            $table->string('desc');
-            $table->string('url_file');
+            $table->string('file_name');
+            $table->string('mime_type');
+            $table->string('path');
+            $table->string('disk')->default('local');
+            $table->string('file_hash', 64)->unique();
+            $table->string('collection')->nullable();
+         
+            $table->unsignedBigInteger('size');
+
             $table->timestamps();
 
         });
