@@ -3,16 +3,30 @@
         <script>
             document.addEventListener('alpine:init', () => {
                 Alpine.data('uploadfile', () => ({
-                    files: null,                   
-                    submitButton() { 
-                        console.log(this.files);                 
-                        alert(JSON.stringify(this.files.name));
+                    files: null,
+                    submitButton() {
+                        //console.log(this.files);                 
+                        //alert(JSON.stringify(this.files.name));
+                        let url = " {{ route('upload') }}";
+
+                        console.log(this.files);
+
+                        fetch(url, {
+                                method: 'POST',                                 
+                                credentials: 'same-origin',
+                                headers: {
+                                    'Content-Type': 'x-www-form-urlencoded',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify(this.files)
+                            })
+                            .then(console.log("archivo subido"))
+
+                        return false;
                     },
+
                 }))
             })
-
-
-          
         </script>
     </x-slot>
 
@@ -130,7 +144,7 @@
 
             <!-- Upload files -->
             <div class="flex mt-10 mb-4" x-data="uploadfile">
-                <div class="flex-auto" >
+                <div class="flex-auto">
 
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
                     <input x-on:change="files = $event.target.files[0]" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
