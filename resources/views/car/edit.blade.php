@@ -1,9 +1,18 @@
 <x-app-layout>
     <x-slot name="scriptjs">
         <script>
-            function clickOnUploadButton() {
-                alert("hola");
-            }
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('uploadfile', () => ({
+                    files: null,                   
+                    submitButton() { 
+                        console.log(this.files);                 
+                        alert(JSON.stringify(this.files.name));
+                    },
+                }))
+            })
+
+
+          
         </script>
     </x-slot>
 
@@ -108,34 +117,32 @@
                     </div>
                 </div>
 
-                <!-- Upload files -->
-                <div class="flex mt-4 mb-4">
-                    <div class="flex-auto">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
-                    </div>
-                    <div class="mt-5 flex-auto"  x-data="">
-                        <button @click="clickOnUploadButton()" class="mx-5 px-6 py-3 text-white-800 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
-                            Subir
-                        </button>
-                    </div>
-                </div>
-
-
-                    <div class="flex items-center justify-start mt-4">
+                <div class="flex items-center justify-start mt-4">
                     <a href="{{ route('car.index')}}" class="mx-5 px-6 py-3 text-white-800 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-blue-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
-                        Cancel
+                        {{ucfirst(__('cancel'))}}
                     </a>
                     <button type="submit" class="mx-5 px-6 py-3 text-white-800 no-underline bg-red-500 rounded hover:bg-red-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
-                        Save
+                        {{ucfirst(__('save'))}}
                     </button>
                 </div>
 
-                <div class="flex items-center justify-start mt-4">
+            </form>
 
+            <!-- Upload files -->
+            <div class="flex mt-10 mb-4" x-data="uploadfile">
+                <div class="flex-auto" >
+
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+                    <input x-on:change="files = $event.target.files[0]" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                </div>
+                <div class="mt-5 flex-auto">
+                    <button @click="submitButton()" class="mx-5 px-6 py-3 text-white-800 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
+                        Subir
+                    </button>
                 </div>
 
-            </form>
+            </div>
+
         </div>
     </div>
 
