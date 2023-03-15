@@ -23,17 +23,15 @@ class UploadController extends Controller
     {  
       
         //Gate::authorize('upload-files');
-        dd($request["file"]);
-        die("");
+        //dd($request->file('file'));
+        //die("");
 
         $file = $request->file('file');
         $name = $file->hashName(); // <----- Asignar yo el nombre para evitar problemas. Necesitaré ID coche.
-
-        return response()->json(["file"=>$file,"status" => "ok"]);
-
+        
         $upload = Storage::put("documents/{$name}", $file);
 
-        Document::query()->create(
+       /* Document::query()->create(
             attributes: [
                 'name' => "{$name}",
                 'file_name' => $file->getClientOriginalName(),
@@ -49,7 +47,7 @@ class UploadController extends Controller
                 'collection'=> $request->get('collection'),
                 'size' => $file->getSize(),
             ]
-        );
+        );*/
 
         return response()->json(["file"=>$file,"status" => "ok"]);
 
