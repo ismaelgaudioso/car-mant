@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,7 @@ Route::resource('car', App\Http\Controllers\Api\CarController::class)->except(["
 "edit"]);
 Route::resource('maintenance', App\Http\Controllers\Api\MaintenanceController::class)->except(["create",
 "edit"]);
+
+
+Route::post('upload', UploadController::class)->name('upload');
 

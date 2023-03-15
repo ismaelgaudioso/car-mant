@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadRequest;
+use Illuminate\Http\Request;
 use App\Models\Document;
 
 use Illuminate\Support\Facades\Gate;
@@ -15,14 +17,19 @@ class UploadController extends Controller
      * Handle the incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(UploadRequest $request): JsonResponse
-    {
-        Gate::authorize('upload-files');
+    public function __invoke(Request $request): JsonResponse
+    {  
+      
+        //Gate::authorize('upload-files');
+        dd($request["file"]);
+        die("");
 
         $file = $request->file('file');
         $name = $file->hashName(); // <----- Asignar yo el nombre para evitar problemas. Necesitaré ID coche.
+
+        return response()->json(["file"=>$file,"status" => "ok"]);
 
         $upload = Storage::put("documents/{$name}", $file);
 
@@ -44,7 +51,9 @@ class UploadController extends Controller
             ]
         );
 
-        return response()->json("ok");
+        return response()->json(["file"=>$file,"status" => "ok"]);
 
     }
+
+  
 }

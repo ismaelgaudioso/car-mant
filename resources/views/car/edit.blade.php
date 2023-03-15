@@ -9,18 +9,25 @@
                         //alert(JSON.stringify(this.files.name));
                         let url = " {{ route('upload') }}";
 
+                        const data = new FormData();
+                        data.append("file", this.files);
+                        data.append("moco","car");
+
                         console.log(this.files);
 
                         fetch(url, {
-                                method: 'POST',                                 
-                                credentials: 'same-origin',
+                                method: 'POST',
                                 headers: {
-                                    'Content-Type': 'x-www-form-urlencoded',
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                 },
-                                body: JSON.stringify(this.files)
+                                body: data
                             })
-                            .then(console.log("archivo subido"))
+                            .then( (res) => {
+                                console.log(res);
+                            })
+                            .catch( (error) => {
+                                console.log(error);
+                            })
 
                         return false;
                     },
