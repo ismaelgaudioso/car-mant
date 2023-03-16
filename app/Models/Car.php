@@ -16,6 +16,6 @@ class Car extends Model
     }
 
     public function medias(){
-        return $this->belongsToMany(Media::class,'cars_media','car_id','media_id');
+        return $this->belongsToMany(Document::class,'cars_media','car_id','media_id');
     }
 }
