@@ -11,7 +11,8 @@
 
                         const data = new FormData();
                         data.append("file", this.files);
-                        data.append("moco","car");
+                        data.append("type","car");
+                        data.append("id","{{ $car->id}}");
 
                         console.log(this.files);
 
@@ -23,7 +24,7 @@
                                 body: data
                             })
                             .then( (res) => {
-                                console.log(res);
+                                
                             })
                             .catch( (error) => {
                                 console.log(error);

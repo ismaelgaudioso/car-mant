@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadRequest;
 use Illuminate\Http\Request;
 use App\Models\Document;
-
-use Illuminate\Support\Facades\Gate;
+use App\Models\Car;
+use App\Models\Maintenance;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\JsonResponse;
 
@@ -20,38 +20,45 @@ class UploadController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request): JsonResponse
-    {  
-      
-        //Gate::authorize('upload-files');
-        //dd($request->file('file'));
-        //die("");
+    {
+
+
+
+        if (($request->type == "car") && isset($request->id)) {
+
+            $object = Car::find($request->id);
+        } elseif (($request->type == "maintenance") && isset($request->id)) {
+
+            $object = Maintenance::find($request->id);
+        } else {
+            return response()->json(["status" => "Error type document or id"]);
+        }
 
         $file = $request->file('file');
-        $name = $file->hashName(); // <----- Asignar yo el nombre para evitar problemas. Necesitaré ID coche.
-        
-        $upload = Storage::put("documents/{$name}", $file);
+        $name = $request->type . "_" . $request->id . "_" . $file->hashName();
 
-       /* Document::query()->create(
+        $upload = Storage::put("documents/" . $request->type . "/" . $name, file_get_contents($file));
+
+
+
+        $document = Document::create(
             attributes: [
                 'name' => "{$name}",
                 'file_name' => $file->getClientOriginalName(),
                 'mime_type' => $file->getClientMimeType(),
-                'path' => "documents/{$name}",
+                'path' => "documents/{$request->type}",
                 'disk' => config('app.uploads.disk'),
-                'file_hash' => hash_file(
+                'file_hash' => "hash_temporal" /*hash_file(
                     config('app.uploads.hash'),
-                    storage_path(
-                        path: "documents/{$name}",
-                        ),                
-                    ),
-                'collection'=> $request->get('collection'),
+                    storage_path('documents\'.$request->type.'\'.$name),
+                )*/,
+                'collection' => $request->type,
                 'size' => $file->getSize(),
             ]
-        );*/
+        );
 
-        return response()->json(["file"=>$file,"status" => "ok"]);
+        $object->documents()->attach($document);
 
+        return response()->json(["file" => $file, "status" => "ok"]);
     }
-
-  
 }

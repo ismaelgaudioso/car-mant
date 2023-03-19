@@ -15,7 +15,7 @@ class Car extends Model
         return $this->hasMany(Maintenance::class);
     }
 
-    public function medias(){
-        return $this->belongsToMany(Document::class,'cars_media','car_id','media_id');
+    public function documents(){
+        return $this->belongsToMany(Document::class,'cars_documents','car_id','document_id');
     }
 }
