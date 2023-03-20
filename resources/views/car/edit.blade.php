@@ -11,8 +11,8 @@
 
                         const data = new FormData();
                         data.append("file", this.files);
-                        data.append("type","car");
-                        data.append("id","{{ $car->id}}");
+                        data.append("type", "car");
+                        data.append("id", "{{ $car->id}}");
 
                         console.log(this.files);
 
@@ -23,10 +23,10 @@
                                 },
                                 body: data
                             })
-                            .then( (res) => {
-                                
+                            .then((res) => {
+
                             })
-                            .catch( (error) => {
+                            .catch((error) => {
                                 console.log(error);
                             })
 
@@ -149,12 +149,37 @@
                 </div>
 
             </form>
+        </div>
+        <div class="w-full mt-4 px-6 py-4 bg-white rounded shadow-md ring-1 ring-gray-900/10">
+
+            <div class="mt-8">
+                <div class="p-4">
+                    <h2> {{ ucfirst(__('documents')) }} </h2>
+                </div>
+                <div class="p-4 grid grid-cols-3 gap-2">
+                    @foreach($documents as $document)
+                    <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500">
+                        @if($document->mime_type == "application/pdf")
+                        <i class="fa-regular fa-file-pdf text-black"></i> {{ ucfirst(__('PDF document')) }}
+                        @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
+                        <i class="fa-regular fa-file-image text-black"></i> {{ ucfirst(__('image')) }}
+                        @else
+                        <i class="fa-regular fa-file text-black"></i>
+                        <!-- ID:{{ $document->id }} - {{ $document->name }} --> {{ ucfirst(__('file')) }}
+                        @endif
+                        <div class="text-black">
+                            {{ Str::limit($document->file_name,15,'...') }}
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
 
             <!-- Upload files -->
             <div class="flex mt-10 mb-4" x-data="uploadfile">
                 <div class="flex-auto">
 
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">{{ __('Upload file') }}</label>
                     <input x-on:change="files = $event.target.files[0]" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
                 </div>
                 <div class="mt-5 flex-auto">
@@ -164,6 +189,8 @@
                 </div>
 
             </div>
+
+
 
         </div>
     </div>

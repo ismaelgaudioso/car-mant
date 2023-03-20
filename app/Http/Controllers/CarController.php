@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Car\StoreRequest;
 use App\Http\Requests\Car\PutRequest;
 use App\Models\Car;
+use App\Models\Document;
 
 class CarController extends Controller
 {
@@ -42,8 +43,9 @@ class CarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Car $car)
-    {        
-        return view("car.show",compact('car'));
+    {      
+        $documents = Car::find($car->id)->documents;  
+        return view("car.show",compact('documents','car'));
     }
 
     /**
@@ -54,7 +56,8 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        return view("car.edit",compact('car'));
+        $documents = Car::find($car->id)->documents; 
+        return view("car.edit",compact('documents','car'));
     }
 
     /**

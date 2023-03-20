@@ -37,28 +37,38 @@ class UploadController extends Controller
         $file = $request->file('file');
         $name = $request->type . "_" . $request->id . "_" . $file->hashName();
 
-        $upload = Storage::put("documents/" . $request->type . "/" . $name, file_get_contents($file));
+        if (Storage::put("documents/" . $request->type . "/" . $name, file_get_contents($file))) {
 
-
-
-        $document = Document::create(
-            attributes: [
-                'name' => "{$name}",
-                'file_name' => $file->getClientOriginalName(),
-                'mime_type' => $file->getClientMimeType(),
-                'path' => "documents/{$request->type}",
-                'disk' => config('app.uploads.disk'),
-                'file_hash' => "hash_temporal" /*hash_file(
+            $document = Document::create(
+                attributes: [
+                    'name' => "{$name}",
+                    'file_name' => $file->getClientOriginalName(),
+                    'mime_type' => $file->getClientMimeType(),
+                    'path' => "documents/{$request->type}",
+                    'disk' => config('app.uploads.disk'),
+                    'file_hash' => "hash_temporal".$request->type."_".$request->id."_".rand(0,1000) /*hash_file(
                     config('app.uploads.hash'),
                     storage_path('documents\'.$request->type.'\'.$name),
                 )*/,
-                'collection' => $request->type,
-                'size' => $file->getSize(),
-            ]
-        );
+                    'collection' => $request->type,
+                    'size' => $file->getSize(),
+                ]
+            );
 
-        $object->documents()->attach($document);
+            $object->documents()->attach($document);
 
-        return response()->json(["file" => $file, "status" => "ok"]);
+            if($request->type == "car"){
+                $documents = Car::find($request->id)->documents; 
+            }elseif($request->type == "maintenance"){
+                $documents = Maintenance::find($request->id)->documents;
+            }else{
+                $documents = null;
+            }
+
+            return response()->json(["files" => $documents, "status" => "ok"]);
+
+        }else{
+            return response()->json(["status" => "error"]);
+        }
     }
 }
