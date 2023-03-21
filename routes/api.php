@@ -24,6 +24,9 @@ Route::resource('car', App\Http\Controllers\Api\CarController::class)->except(["
 Route::resource('maintenance', App\Http\Controllers\Api\MaintenanceController::class)->except(["create",
 "edit"]);
 
+Route::resource('document', App\Http\Controllers\Api\DocumentController::class)->except(["index","create",
+"edit","show","store","update"]);
+
 
 Route::post('upload', UploadController::class)->name('upload');
 

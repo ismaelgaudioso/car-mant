@@ -34,7 +34,32 @@
                     },
 
                 }))
-            })
+            });
+
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('manageFiles', () => ({
+                    files: null,
+                    deleteFile(id) {
+
+                        if (confirm("{{__('Do you really want to remove this document?')}}") == true) {
+                            let url = " {{ route('document.destroy', ':id') }}";
+                            url = url.replace(":id", id);
+
+                            fetch(url, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                            }).then((res) => {
+                                location.reload();
+                            }).catch((error) => {
+                                console.log(error);
+                            });
+                        }
+
+                    }
+                }))
+            });
         </script>
     </x-slot>
 
@@ -158,7 +183,7 @@
                 </div>
                 <div class="p-4 grid grid-cols-3 gap-2">
                     @foreach($documents as $document)
-                    <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500">
+                    <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500" x-data="manageFiles">
                         @if($document->mime_type == "application/pdf")
                         <i class="fa-regular fa-file-pdf text-black"></i> {{ ucfirst(__('PDF document')) }}
                         @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
@@ -167,6 +192,9 @@
                         <i class="fa-regular fa-file text-black"></i>
                         <!-- ID:{{ $document->id }} - {{ $document->name }} --> {{ ucfirst(__('file')) }}
                         @endif
+                        <button @click="deleteFile({{$document->id}})" class="rounded-full bg-red-200 px-2 text-red-800 hover:bg-red-800 hover:text-red-200">
+                            X
+                        </button>
                         <div class="text-black">
                             {{ Str::limit($document->file_name,15,'...') }}
                         </div>
@@ -184,7 +212,7 @@
                 </div>
                 <div class="mt-5 flex-auto">
                     <button @click="submitButton()" class="mx-5 px-6 py-3 text-white-800 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">
-                        Subir
+                        <i class="fa-solid fa-upload"></i> {{ ucfirst(__('upload')) }}
                     </button>
                 </div>
 
