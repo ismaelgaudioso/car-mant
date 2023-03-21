@@ -24,7 +24,7 @@
                                 body: data
                             })
                             .then((res) => {
-
+                                location.reload();
                             })
                             .catch((error) => {
                                 console.log(error);

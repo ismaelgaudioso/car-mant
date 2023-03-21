@@ -37,19 +37,16 @@ class UploadController extends Controller
         $file = $request->file('file');
         $name = $request->type . "_" . $request->id . "_" . $file->hashName();
 
-        if (Storage::put("documents/" . $request->type . "/" . $name, file_get_contents($file))) {
+        if (Storage::put("public/documents/" . $request->type . "/" . $name, file_get_contents($file))) {
 
             $document = Document::create(
                 attributes: [
                     'name' => "{$name}",
                     'file_name' => $file->getClientOriginalName(),
                     'mime_type' => $file->getClientMimeType(),
-                    'path' => "documents/{$request->type}",
+                    'path' => "public/documents/{$request->type}",
                     'disk' => config('app.uploads.disk'),
-                    'file_hash' => "hash_temporal".$request->type."_".$request->id."_".rand(0,1000) /*hash_file(
-                    config('app.uploads.hash'),
-                    storage_path('documents\'.$request->type.'\'.$name),
-                )*/,
+                    'file_hash' => md5_file($file->getRealPath()), 
                     'collection' => $request->type,
                     'size' => $file->getSize(),
                 ]

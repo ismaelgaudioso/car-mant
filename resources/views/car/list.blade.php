@@ -67,7 +67,21 @@
                                     <td @click="clickOnRow(carId)" class="py-4 px-6 cursor-pointer"> {{ $car->name }} </td>
                                     <td @click="clickOnRow(carId)" class="py-4 px-6 cursor-pointer"> {{ substr($car->desc,0,15) }} </td>
                                     <td @click="clickOnRow(carId)" class="py-4 px-6 cursor-pointer"> {{ $car->car_license }} </td>
-                                    <td class="py-4 px-6"> </td>
+                                    <td class="py-4 px-6"> 
+                                        @foreach($car->documents as $document)
+                                        <div class="text-xs text-gray-700">
+                                            @if($document->mime_type == "application/pdf")
+                                            <i class="fa-regular fa-file-pdf text-black">
+                                            @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
+                                            <i class="fa-regular fa-file-image text-black">
+                                            @else
+                                            <i class="fa-regular fa-file text-black">
+                                            @endif
+                                            </i>
+                                            <a class="hover:text-red-600" href="{{ asset('storage/documents/car/'. $document->name) }}" target="_blank"> {{ Str::limit($document->file_name,20,'...')}} </a>
+                                        </div>
+                                        @endforeach
+                                    </td>
                                     <td class="py-4 px-6 text-center">      
                                         <form class="inline" action="{{ route('car.destroy',$car) }}" method="post" onsubmit="if(!confirm('Do you really want to delete this car?')){return false;}">
                                             @method("DELETE")
