@@ -58,4 +58,37 @@
         </div>
     </div>
 
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-5 p-5">
+
+        <div class="mt-8">
+            <div class="p-4">
+                <h2> {{ ucfirst(__('documents')) }} </h2>
+            </div>
+            <div class="p-4 grid grid-cols-3 gap-2">
+                @if (count($documents) > 0)
+                @foreach($documents as $document)
+                <a href="{{ asset('storage/documents/car/'. $document->name) }}" target="_blank" >
+                    <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500">
+                        @if($document->mime_type == "application/pdf")
+                        <i class="fa-regular fa-file-pdf text-black"></i> {{ ucfirst(__('PDF document')) }}
+                        @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
+                        <i class="fa-regular fa-file-image text-black"></i> {{ ucfirst(__('image')) }}
+                        @else
+                        <i class="fa-regular fa-file text-black"></i>
+                        <!-- ID:{{ $document->id }} - {{ $document->name }} --> {{ ucfirst(__('file')) }}
+                        @endif
+                        <div class="text-black">
+                            {{ Str::limit($document->file_name,15,'...') }}
+                        </div>
+                    </div>
+                </a>
+                @endforeach
+                @else
+                    {{ ucfirst(__('no documents')) }}
+                @endif
+            </div>
+        </div>
+
+    </div>
+
 </x-app-layout>

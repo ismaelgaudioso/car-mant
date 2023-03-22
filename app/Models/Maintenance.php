@@ -12,6 +12,6 @@ class Maintenance extends Model
     protected $fillable = ["details","maintenance_type","maintenance_date","price","car_id","kilometers"];
 
     public function documents(){
-        return $this->belongsToMany(Document::class,'maintenances_media','maintenance_id','document_id');
+        return $this->belongsToMany(Document::class,'documents_maintenances','maintenance_id','document_id');
     }
 }

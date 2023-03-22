@@ -55,7 +55,8 @@ class MaintenanceController extends Controller
     public function show(Maintenance $maintenance)
     {
         $car = Car::find($maintenance->car_id);
-        return view("maintenance.show",compact('maintenance','car'));
+        $documents = Maintenance::find($maintenance->id)->documents; 
+        return view("maintenance.show",compact('maintenance','car','documents'));
     }
 
     /**
@@ -67,7 +68,8 @@ class MaintenanceController extends Controller
     public function edit(Maintenance $maintenance)
     {
         $cars = Car::all();
-        return view("maintenance.edit",compact('maintenance','cars'));
+        $documents = Maintenance::find($maintenance->id)->documents; 
+        return view("maintenance.edit",compact('maintenance','cars','documents'));
     }
 
     /**

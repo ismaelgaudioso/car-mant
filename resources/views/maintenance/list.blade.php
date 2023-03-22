@@ -90,7 +90,30 @@
                                     <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ $maintenance->kilometers }} </td>                            
                                     <td @click="clickOnRow(maintenanceId)" class="py-4 px-6 cursor-pointer"> {{ date("d/m/Y", strtotime($maintenance->maintenance_date )) }} </td>
                                     <td @click="clickOnRow(maintenanceId)" class="py-4 px-4 cursor-pointer"> {{ $maintenance->price }}€</td>
-                                    <td class="py-4 px-6"> </td>
+                                    <td class="py-4 px-6"> 
+                                       
+                                        @if(count($maintenance->documents) > 0)
+                                            @foreach($maintenance->documents as $document)
+                                            <div class="text-xs text-gray-700">
+                                                @if($document->mime_type == "application/pdf")
+                                                <i class="fa-regular fa-file-pdf text-black">
+                                                @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
+                                                <i class="fa-regular fa-file-image text-black">
+                                                @else
+                                                <i class="fa-regular fa-file text-black">
+                                                @endif
+                                                </i>
+                                                <a class="hover:text-red-600" href="{{ asset('storage/documents/maintenance/'. $document->name) }}" target="_blank"> {{ Str::limit($document->file_name,20,'...')}} </a>
+                                            </div>
+                                            @endforeach
+                                        @else
+                                            <div class="text-xs text-gray-700">
+                                                {{ ucfirst(__('no documents')) }}
+                                            </div>
+                                        @endif
+                                        
+
+                                    </td>
                                     <td class="py-4 px-6 text-center">
                                         <form class="inline" action="{{ route('maintenance.destroy',$maintenance) }}" method="post" onsubmit="if(!confirm('Do you really want to delete this maintenance?')){return false;}">
                                             @method("DELETE")

@@ -131,8 +131,7 @@
                                         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input datepicker datepicker-format="yyyy/mm/dd" data-date="{{ date('Y/m/d', strtotime($car->first_purchase_date )) }}" name="first_purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" value="
-                                {{ date('Y/m/d', strtotime($car->first_purchase_date )) }}" />
+                                <input datepicker datepicker-format="yyyy/mm/dd" data-date="{{ date('Y/m/d', strtotime($car->first_purchase_date )) }}" name="first_purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{ ucfirst(__('select date')) }}" value="{{ date('Y/m/d', strtotime($car->first_purchase_date )) }}" />
                             </div>
                             @error('firs_purchase_date')
                             <span class="text-red-600 text-sm">
@@ -151,8 +150,7 @@
                                         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input datepicker datepicker-format="yyyy/mm/dd" data-date="{{ date('Y/m/d', strtotime($car->purchase_date )) }}" name="purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" value="
-                                {{ date('Y/m/d', strtotime($car->purchase_date )) }}" />
+                                <input datepicker datepicker-format="yyyy/mm/dd" data-date="{{ date('Y/m/d', strtotime($car->purchase_date )) }}" name="purchase_date" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{ ucfirst(__('select date')) }}" value="{{ date('Y/m/d', strtotime($car->purchase_date )) }}" />
                             </div>
                             @error('purchase_date')
                             <span class="text-red-600 text-sm">
@@ -182,24 +180,27 @@
                     <h2> {{ ucfirst(__('documents')) }} </h2>
                 </div>
                 <div class="p-4 grid grid-cols-3 gap-2">
-                    @foreach($documents as $document)
-                    <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500" x-data="manageFiles">
-                        @if($document->mime_type == "application/pdf")
-                        <i class="fa-regular fa-file-pdf text-black"></i> {{ ucfirst(__('PDF document')) }}
-                        @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
-                        <i class="fa-regular fa-file-image text-black"></i> {{ ucfirst(__('image')) }}
-                        @else
-                        <i class="fa-regular fa-file text-black"></i>
-                        <!-- ID:{{ $document->id }} - {{ $document->name }} --> {{ ucfirst(__('file')) }}
-                        @endif
-                        <button @click="deleteFile({{$document->id}})" class="rounded-full bg-red-200 px-2 text-red-800 hover:bg-red-800 hover:text-red-200">
-                            X
-                        </button>
-                        <div class="text-black">
-                            {{ Str::limit($document->file_name,15,'...') }}
+                    @if (count($documents) > 0)
+                        @foreach($documents as $document)
+                        <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500" x-data="manageFiles">
+                            @if($document->mime_type == "application/pdf")
+                            <i class="fa-regular fa-file-pdf text-black"></i> {{ ucfirst(__('PDF document')) }}
+                            @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
+                            <i class="fa-regular fa-file-image text-black"></i> {{ ucfirst(__('image')) }}
+                            @else
+                            <i class="fa-regular fa-file text-black"></i> {{ ucfirst(__('file')) }}
+                            @endif
+                            <button @click="deleteFile({{$document->id}})" class="rounded-full bg-red-200 px-2 text-red-800 hover:bg-red-800 hover:text-red-200">
+                                X
+                            </button>
+                            <div class="text-black">
+                                {{ Str::limit($document->file_name,15,'...') }}
+                            </div>
                         </div>
-                    </div>
-                    @endforeach
+                        @endforeach
+                    @else
+                        {{ ucfirst(__('no documents')) }}
+                    @endif
                 </div>
             </div>
 
