@@ -25,10 +25,8 @@ class UploadController extends Controller
 
 
         if (($request->type == "car") && isset($request->id)) {
-
             $object = Car::find($request->id);
         } elseif (($request->type == "maintenance") && isset($request->id)) {
-
             $object = Maintenance::find($request->id);
         } else {
             return response()->json(["status" => "Error type document or id"]);

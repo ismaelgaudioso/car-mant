@@ -180,24 +180,27 @@
                     <h2> {{ ucfirst(__('documents')) }} </h2>
                 </div>
                 <div class="p-4 grid grid-cols-3 gap-2">
-                    @foreach($documents as $document)
-                    <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500" x-data="manageFiles">
-                        @if($document->mime_type == "application/pdf")
-                        <i class="fa-regular fa-file-pdf text-black"></i> {{ ucfirst(__('PDF document')) }}
-                        @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
-                        <i class="fa-regular fa-file-image text-black"></i> {{ ucfirst(__('image')) }}
-                        @else
-                        <i class="fa-regular fa-file text-black"></i>
-                        <!-- ID:{{ $document->id }} - {{ $document->name }} --> {{ ucfirst(__('file')) }}
-                        @endif
-                        <button @click="deleteFile({{$document->id}})" class="rounded-full bg-red-200 px-2 text-red-800 hover:bg-red-800 hover:text-red-200">
-                            X
-                        </button>
-                        <div class="text-black">
-                            {{ Str::limit($document->file_name,15,'...') }}
+                    @if (count($documents) > 0)
+                        @foreach($documents as $document)
+                        <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500" x-data="manageFiles">
+                            @if($document->mime_type == "application/pdf")
+                            <i class="fa-regular fa-file-pdf text-black"></i> {{ ucfirst(__('PDF document')) }}
+                            @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
+                            <i class="fa-regular fa-file-image text-black"></i> {{ ucfirst(__('image')) }}
+                            @else
+                            <i class="fa-regular fa-file text-black"></i> {{ ucfirst(__('file')) }}
+                            @endif
+                            <button @click="deleteFile({{$document->id}})" class="rounded-full bg-red-200 px-2 text-red-800 hover:bg-red-800 hover:text-red-200">
+                                X
+                            </button>
+                            <div class="text-black">
+                                {{ Str::limit($document->file_name,15,'...') }}
+                            </div>
                         </div>
-                    </div>
-                    @endforeach
+                        @endforeach
+                    @else
+                        {{ ucfirst(__('no documents')) }}
+                    @endif
                 </div>
             </div>
 
