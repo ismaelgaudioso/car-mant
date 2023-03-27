@@ -9,9 +9,7 @@ class Insurance extends Model
 {
     use HasFactory;
 
-    public function car(){
-        return $this->hasOne(Car::class);
-    }
+    protected $fillable = ["insurance_carrier","insurance_number","phone","coverage","car_id","due_date","price"];
 
     public function documents(){
         return $this->belongsToMany(Document::class,'documents_insurances','insurance_id','document_id');

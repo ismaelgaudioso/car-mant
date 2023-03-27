@@ -15,6 +15,10 @@ class Car extends Model
         return $this->hasMany(Maintenance::class);
     }
 
+    public function insurances(){
+        return $this->hasOne(Insurance::class);
+    }
+
     public function documents(){
         return $this->belongsToMany(Document::class,'cars_documents','car_id','document_id');
     }

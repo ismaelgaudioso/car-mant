@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insurance;
-use Illuminate\Http\Request;
+use App\Models\Car;
+use App\Http\Requests\Insurance\StoreRequest;
 
 class InsuranceController extends Controller
 {
@@ -14,7 +15,13 @@ class InsuranceController extends Controller
      */
     public function index()
     {
-        //
+        //$insurances = Insurance::paginate(10);
+
+        $insurances = Insurance::join('cars', 'cars.id', '=', 'insurances.car_id')
+            ->select("insurances.*","cars.name as car_name","cars.car_license as car_license")
+            ->paginate(10);
+
+        return view('insurance.list', compact('insurances'));
     }
 
     /**
@@ -24,7 +31,8 @@ class InsuranceController extends Controller
      */
     public function create()
     {
-        //
+        $cars = Car::all();
+        return view('insurance.create',compact('cars'));
     }
 
     /**
@@ -33,9 +41,10 @@ class InsuranceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        Insurance::create($request->validated());
+        return to_route('insurance.index')->with('status','Insurance added');
     }
 
     /**
@@ -46,7 +55,8 @@ class InsuranceController extends Controller
      */
     public function show(Insurance $insurance)
     {
-        //
+        $documents = Insurance::find($insurance->id)->documents;
+        return view("insurance.show",compact('documents','insurance'));
     }
 
     /**
@@ -57,7 +67,8 @@ class InsuranceController extends Controller
      */
     public function edit(Insurance $insurance)
     {
-        //
+        $documents = Insurance::find($insurance->id)->documents;
+        return view("documents.edit",compact('documents','insurance'));
     }
 
     /**
@@ -67,9 +78,10 @@ class InsuranceController extends Controller
      * @param  \App\Models\Insurance  $insurance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Insurance $insurance)
+    public function update(StoreRequest $request, Insurance $insurance)
     {
-        //
+        $insurance->update($request->validated());
+        return to_route("insurance.show",compact('insurance'))->with('status','Insurance updated.');
     }
 
     /**
@@ -80,6 +92,7 @@ class InsuranceController extends Controller
      */
     public function destroy(Insurance $insurance)
     {
-        //
+        $insurance->delete();
+        return to_route("insurance.index")->with('stauts','Isurance deleted.');
     }
 }
