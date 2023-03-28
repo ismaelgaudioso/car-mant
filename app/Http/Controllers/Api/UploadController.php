@@ -7,6 +7,7 @@ use App\Http\Requests\UploadRequest;
 use Illuminate\Http\Request;
 use App\Models\Document;
 use App\Models\Car;
+use App\Models\Insurance;
 use App\Models\Maintenance;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\JsonResponse;
@@ -28,6 +29,8 @@ class UploadController extends Controller
             $object = Car::find($request->id);
         } elseif (($request->type == "maintenance") && isset($request->id)) {
             $object = Maintenance::find($request->id);
+        } elseif (($request->type == "insurance") && isset($request->id)) {
+            $object = Insurance::find($request->id);
         } else {
             return response()->json(["status" => "Error type document or id"]);
         }
@@ -56,6 +59,8 @@ class UploadController extends Controller
                 $documents = Car::find($request->id)->documents; 
             }elseif($request->type == "maintenance"){
                 $documents = Maintenance::find($request->id)->documents;
+            }elseif($request->type == "insurance"){
+                $documents = Insurance::find($request->id)->documents;
             }else{
                 $documents = null;
             }

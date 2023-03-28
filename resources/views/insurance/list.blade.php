@@ -97,7 +97,7 @@
                                         @endif
                                     </td>
                                     <td class="py-4 px-6 text-center">
-                                        <form class="inline" action="{{ route('car.destroy',$insurance) }}" method="post" onsubmit="if(!confirm('Do you really want to delete this car?')){return false;}">
+                                        <form class="inline" action="{{ route('insurance.destroy',$insurance) }}" method="post" onsubmit="if(!confirm('Do you really want to delete this insurance?')){return false;}">
                                             @method("DELETE")
                                             @csrf
                                             <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"> <i class="fas fa-light fa-trash text-red-500"></i> </button>

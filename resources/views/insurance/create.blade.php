@@ -70,7 +70,7 @@
                     </div>
 
                      <!-- Price -->
-                    <div class="mt-2">
+                    <div>
                         <x-input-label for="price" :value="ucfirst(__('price'))" />                    
                         <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="price" placeholder="{{__('price')}}" value="{{old('price')}}">
                         @error('price')

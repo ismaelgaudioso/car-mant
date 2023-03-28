@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('insurance_number');
             $table->string('phone');
             $table->string('coverage');
-            $table->foreignId('car_id')->references('id')->on('cars');
+            $table->foreignId('car_id')->references('id')->on('cars')->onDelete('cascade');
             $table->timestamps();
         });
     }

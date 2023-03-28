@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Insurance;
 use App\Models\Car;
 use App\Http\Requests\Insurance\StoreRequest;
+use App\Http\Requests\Insurance\PutRequest;
 
 class InsuranceController extends Controller
 {
@@ -69,7 +70,9 @@ class InsuranceController extends Controller
     public function edit(Insurance $insurance)
     {
         $documents = Insurance::find($insurance->id)->documents;
-        return view("documents.edit",compact('documents','insurance'));
+        $car = Car::find($insurance->car_id);
+        $cars = Car::all();
+        return view("insurance.edit",compact('documents','insurance','car','cars'));
     }
 
     /**
@@ -79,7 +82,7 @@ class InsuranceController extends Controller
      * @param  \App\Models\Insurance  $insurance
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, Insurance $insurance)
+    public function update(PutRequest $request, Insurance $insurance)
     {
         $insurance->update($request->validated());
         return to_route("insurance.show",compact('insurance'))->with('status','Insurance updated.');
@@ -94,6 +97,6 @@ class InsuranceController extends Controller
     public function destroy(Insurance $insurance)
     {
         $insurance->delete();
-        return to_route("insurance.index")->with('stauts','Isurance deleted.');
+        return to_route("insurance.index")->with('status','Insurance deleted.');
     }
 }

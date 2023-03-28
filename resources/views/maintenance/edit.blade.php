@@ -145,7 +145,7 @@
                         @enderror
                     </div>
 
-                    <div class="mt-2">
+                    <div>
                         <x-input-label for="maintenance_date" :value="ucfirst(__('maintenance date'))" />
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

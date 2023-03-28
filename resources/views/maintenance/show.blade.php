@@ -67,7 +67,7 @@
             <div class="p-4 grid grid-cols-3 gap-2">
                 @if (count($documents) > 0)
                 @foreach($documents as $document)
-                <a href="{{ asset('storage/documents/car/'. $document->name) }}" target="_blank" >
+                <a href="{{ asset('storage/documents/maintenance/'. $document->name) }}" target="_blank" >
                     <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500">
                         @if($document->mime_type == "application/pdf")
                         <i class="fa-regular fa-file-pdf text-black"></i> {{ ucfirst(__('PDF document')) }}
