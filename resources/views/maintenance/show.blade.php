@@ -13,7 +13,7 @@
 
         <div class="flex flex-row">  
                 <div class="md:basis-1/2 sm:basis-1 text-gray-400 px-4 py-2">ID: <strong>{{ $maintenance->id}}</strong></div>
-                <div class="md:basis-1/2 sm:basis-1 text-gray-400 px-4 py-2">{{__('Modified at')}}: <strong>{{ $maintenance->created_at}}</strong></div> 
+                <div class="md:basis-1/2 sm:basis-1 text-gray-400 px-4 py-2">{{__('Modified at')}}: <strong>{{ $maintenance->updated_at}}</strong></div> 
             </div>  
 
         <div class="w-full px-6 py-4 bg-white rounded shadow-md ring-1 ring-gray-900/10">       

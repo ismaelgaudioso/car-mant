@@ -96,7 +96,7 @@
                     </div>
 
                     <!-- Due date -->
-                    <div class="mt-2">
+                    <div>
                             <x-input-label for="due_date" :value="ucfirst(__('due date'))" />
                             <div class="relative">
                                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -115,7 +115,7 @@
                     
                 </div>
                 <!-- Coverage -->
-                <div class="mt-2">
+                <div>
                     <x-input-label for="coverage" :value="ucfirst(__('coverage'))" />                    
                     <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="coverage" placeholder="{{__('Coverage')}}" value="{{old('coverage')}}">
                     @error('coverage')

@@ -56,7 +56,8 @@ class InsuranceController extends Controller
     public function show(Insurance $insurance)
     {
         $documents = Insurance::find($insurance->id)->documents;
-        return view("insurance.show",compact('documents','insurance'));
+        $car = Car::find($insurance->car_id);
+        return view("insurance.show",compact('documents','insurance','car'));
     }
 
     /**
