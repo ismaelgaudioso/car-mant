@@ -56,6 +56,7 @@
 				<!-- Actions -->
 				<div class="px-4 py-5">
 					<a href="{{ route('user.edit',$user) }}" class="mx-5 px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-blue-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">{{ ucfirst(__('edit')) }}</a>
+					<a href="{{ route(') }}" class="mx-5 px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-blue-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">{{ ucfirst(__('reset password')) }}</a>
 					<form class="inline" action="{{ route('user.destroy',$user) }}" method="post">
 						@method("DELETE")
 						@csrf

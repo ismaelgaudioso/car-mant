@@ -13,7 +13,7 @@ class PutRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class PutRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => "required|min:3|max:180",
+            "email" => "required|min:3|max:180",
         ];
     }
 }

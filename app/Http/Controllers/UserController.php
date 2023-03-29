@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use App\Http\Requests\User\PutRequest;
+use App\Http\Requests\User\StoreRequest;
 
 class UserController extends Controller
 {
@@ -61,9 +63,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view("user.edit",compact('user','roles'));
     }
 
     /**
@@ -73,9 +76,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PutRequest $request, User $user)
     {
-        //
+        $user->update($request->validated());
+        return to_route("user.show",compact('user'))->with('status','User updated.');
     }
 
     /**
@@ -84,8 +88,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return to_route("user.index")->with('status',"User deleted.");
     }
 }

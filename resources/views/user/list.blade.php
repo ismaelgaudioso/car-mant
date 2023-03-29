@@ -73,6 +73,7 @@
                                     <td @click="clickOnRow(userId)" class="py-4 px-6 cursor-pointer"> {{ $user->email_verified_at }} </td>
                                     <td @click="clickOnRow(userId)" class="py-4 px-6 cursor-pointer"> {{ $user->updated_at }} </td>
                                     <td class="py-4 px-6 text-center">
+                                        <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"> <i class="fas fa-light fa-trash text-blue-500"></i> </button>
                                         <form class="inline" action="{{ route('user.destroy',$user) }}" method="post" onsubmit="if(!confirm('Do you really want to delete this user?')){return false;}">
                                             @method("DELETE")
                                             @csrf
