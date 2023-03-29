@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('insurances', function (Blueprint $table) {
-            $table->dateTime('due_date');
-            $table->decimal('price',10,2);
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 
@@ -26,9 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('insurances', function (Blueprint $table) {
-            $table->dropColumn('due_date');
-            $table->dropColumn('price');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('role_id');
         });
     }
 };

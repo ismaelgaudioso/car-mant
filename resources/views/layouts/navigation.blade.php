@@ -52,6 +52,12 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        @if (Auth::user()->role_id > 1)
+                        <x-dropdown-link :href="route('user.index')">
+							{{ __("Users") }}
+						</x-dropdown-link>
+                        @endif
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -103,6 +109,11 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                @if (Auth::user()->role_id > 2)
+                <x-responsive-nav-link :href="route('logout')">
+					{{ __('Users') }}
+				</x-responsive-nav-link>
+                @endif
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

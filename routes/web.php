@@ -3,6 +3,7 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,6 @@ Route::get('/dashboard', function () {
 Route::resource('car',CarController::class)->middleware(['auth', 'verified']);
 Route::resource('maintenance',MaintenanceController::class)->middleware(['auth', 'verified']);
 Route::resource('insurance',InsuranceController::class)->middleware(['auth', 'verified']);
+Route::resource('user',UserController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

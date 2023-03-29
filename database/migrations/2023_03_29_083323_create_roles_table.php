@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('insurances', function (Blueprint $table) {
-            $table->dateTime('due_date');
-            $table->decimal('price',10,2);
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');            
+            $table->timestamps();
         });
     }
 
@@ -26,9 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('insurances', function (Blueprint $table) {
-            $table->dropColumn('due_date');
-            $table->dropColumn('price');
-        });
+        Schema::dropIfExists('roles');
     }
 };
