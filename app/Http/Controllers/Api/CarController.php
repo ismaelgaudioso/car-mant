@@ -17,7 +17,7 @@ class CarController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json(Car::paginate(10));
+        return response()->json(Car::all());
     }
    
 

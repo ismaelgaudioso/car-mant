@@ -10,12 +10,7 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
+                <!-- Navigation Links -->                
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('car.index')" :active="request()->routeIs('car.*')">
@@ -52,11 +47,28 @@
                     </x-slot>
 
                     <x-slot name="content">
+
+                        <x-dropdown-link :href="route('car.index')">
+							{{ ucfirst(__("cars")) }}
+						</x-dropdown-link>
+
+                        <x-dropdown-link :href="route('maintenance.index')">
+							{{ ucfirst(__("maintenances")) }}
+						</x-dropdown-link>
+
+                        <x-dropdown-link :href="route('insurance.index')">
+							{{ ucfirst(__("insurances")) }}
+						</x-dropdown-link>
+
+                        <div class="px-4 border-t-2"></div>
+                        
                         @if (Auth::user()->role_id > 1)
                         <x-dropdown-link :href="route('user.index')">
-							{{ __("Users") }}
+							{{ ucfirst(__("Users")) }}
 						</x-dropdown-link>
                         @endif
+
+                        <div class="px-4 border-t-2"></div>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

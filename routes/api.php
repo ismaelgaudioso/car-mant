@@ -19,14 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('car', App\Http\Controllers\Api\CarController::class)->except(["create",
-"edit"]);
-Route::resource('maintenance', App\Http\Controllers\Api\MaintenanceController::class)->except(["create",
-"edit"]);
-
-Route::resource('document', App\Http\Controllers\Api\DocumentController::class)->except(["index","create",
-"edit","show","store","update"]);
+Route::apiResource('car', App\Http\Controllers\Api\CarController::class)->except(["create","edit","store","update","destroy"]);
+Route::apiResource('maintenance', App\Http\Controllers\Api\MaintenanceController::class);
+Route::resource('document', App\Http\Controllers\Api\DocumentController::class)->except(["index","create","edit","show","store","update"]);
 
 
-Route::post('upload', UploadController::class)->name('upload');
+Route::post('upload', App\Http\Controllers\Api\UploadController::class)->name('upload');
 
