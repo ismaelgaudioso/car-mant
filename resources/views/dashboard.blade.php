@@ -1,18 +1,11 @@
-<x-webapp-layout>
+<x-webapp-layout :cars="$cars">
 
-    <div class="mx-auto">
-
-        <div class="content">
-            <div class="h-full p-4 lg:p-8">
-
-                <div class="flex mt-4">
+       <div>
+           
                     Moco
-                </div>
-
-            </div>
+             
         </div>
 
-    </div>
-
+ 
 
 </x-webapp-layout>
