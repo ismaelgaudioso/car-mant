@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'rol_id'
+        'role_id'
     ];
 
     /**
@@ -45,5 +45,12 @@ class User extends Authenticatable
 
     public function roles(){
         return $this->belongsTo(Role::class);
+    }
+
+    public function isAdministrator(){
+        if ($this->role_id > 1)
+            return true;
+        else
+            return false;
     }
 }
