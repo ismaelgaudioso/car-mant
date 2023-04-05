@@ -30,16 +30,17 @@
     <!-- Content -->
     <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
 
-        <!-- Top bar -->
-       @include('layouts.topbar')       
+        @if(!isset($header)) 
+            {{ $header = "" }}
+        @endif
 
+        <!-- Top bar -->
+       @include('layouts.topbar', ["header",$header])       
         <!-- Container -->
         <div class="px-6 pt-6 2xl:container">
             <!-- Panels -->
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-
-                {{ $slot }} 
-                
+                {{ $slot }}                 
             </div>
         </div>
     </div>

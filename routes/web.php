@@ -25,7 +25,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('car',CarController::class)->middleware(['auth', 'verified']);
+Route::resource('admin/car',App\Http\Controllers\Admin\CarController::class)->middleware(['auth', 'verified']);
+
 Route::resource('maintenance',MaintenanceController::class)->middleware(['auth', 'verified']);
 Route::resource('insurance',InsuranceController::class)->middleware(['auth', 'verified']);
 Route::resource('user',UserController::class)->middleware(['auth', 'verified']);
