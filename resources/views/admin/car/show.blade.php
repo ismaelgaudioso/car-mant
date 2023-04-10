@@ -7,30 +7,30 @@
         <h1>Panel 1</h1>
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" />
 
-            <h2> {{ ucfirst(__('documents')) }} </h2>
+        <h2> {{ ucfirst(__('documents')) }} </h2>
 
-        <div>
+
+        <ul>
             @if (count($documents) > 0)
+
             @foreach($documents as $document)
-            <a href="{{ asset('storage/documents/car/'. $document->name) }}" target="_blank">
-                <div class="p-4 rounded shadow-md ring-1 ring-gray-300 text-gray-500">
+            <li>
+                <a class="hover:text-gray-500" href="{{ asset('storage/documents/car/'. $document->name) }}" target="_blank">
                     @if($document->mime_type == "application/pdf")
-                    <i class="fa-regular fa-file-pdf text-black"></i> {{ ucfirst(__('PDF document')) }}
+                    <i class="fa-regular fa-file-pdf"></i>
                     @elseif(($document->mime_type == "image/png")||$document->mime_type == "image/jpg")
-                    <i class="fa-regular fa-file-image text-black"></i> {{ ucfirst(__('image')) }}
+                    <i class="fa-regular fa-file-image"></i>
                     @else
-                    <i class="fa-regular fa-file text-black"></i> {{ ucfirst(__('file')) }}
+                    <i class="fa-regular fa-file"></i>
                     @endif
-                    <div class="text-black">
-                        {{ Str::limit($document->file_name,15,'...') }}
-                    </div>
-                </div>
-            </a>
+                    {{ Str::limit($document->file_name,15,'...') }}
+                </a>
+            </li>
             @endforeach
             @else
-            {{ ucfirst(__('no documents')) }}
+            <li>{{ ucfirst(__('no documents')) }}</li>
             @endif
-        </div>
+        </ul>
     </x-panel>
 
     <x-panel span="2">
@@ -49,14 +49,14 @@
         <div class="grid grid-cols-4 gap-2">
             <!-- Actions -->
 
-                <a href="{{ route('car.edit',$car) }}" class="col-end-4 text-center mx-5 px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-blue-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">{{ ucfirst(__('edit')) }}</a>
+            <a href="{{ route('car.edit',$car) }}" class="col-end-4 text-center mx-5 px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:text-blue-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">{{ ucfirst(__('edit')) }}</a>
 
 
-                <form class="col-end-5" action="{{ route('car.destroy',$car) }}" method="post">
-                    @method("DELETE")
-                    @csrf
-                    <button type="submit" class="mx-5 px-6 py-3 text-blue-100 no-underline bg-red-500 rounded hover:bg-red-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">{{ ucfirst(__('delete')) }}</button>
-                </form>
+            <form class="col-end-5" action="{{ route('car.destroy',$car) }}" method="post">
+                @method("DELETE")
+                @csrf
+                <button type="submit" class="mx-5 px-6 py-3 text-blue-100 no-underline bg-red-500 rounded hover:bg-red-600 hover:text-red-100 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300">{{ ucfirst(__('delete')) }}</button>
+            </form>
         </div>
     </x-panel>
 

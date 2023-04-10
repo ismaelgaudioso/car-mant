@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
@@ -20,7 +21,7 @@ class UserController extends Controller
         $users = User::join('roles', 'roles.id', '=', 'users.role_id')
             ->select("users.*","roles.name as role")
             ->paginate(10);
-		return view('user.list', compact('users'));
+		return view('admin.user.list', compact('users'));
     }
 
     /**
@@ -31,7 +32,7 @@ class UserController extends Controller
     public function create()
     {
 
-        return view("user.create");
+        return view("admin.user.create");
     }
 
     /**
@@ -54,7 +55,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $role = Role::find($user->role_id);
-        return view("user.show", compact('user','role'));
+        return view("admin.user.show", compact('user','role'));
     }
 
     /**
@@ -66,7 +67,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        return view("user.edit",compact('user','roles'));
+        return view("admin.user.edit",compact('user','roles'));
     }
 
     /**
