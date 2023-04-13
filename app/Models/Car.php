@@ -9,10 +9,14 @@ class Car extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name","desc","car_license","first_purchase_date","purchase_date"];
+    protected $fillable = ["name","desc","car_license","first_purchase_date","purchase_date","fuel_type"];
 
     public function maintenances(){
         return $this->hasMany(Maintenance::class);
+    }
+
+    public function fuelPayments(){
+        return $this->hasMany(FuelPayment::class);
     }
 
     public function insurances(){

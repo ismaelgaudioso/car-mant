@@ -131,6 +131,23 @@
                     </span>
                     @enderror
                 </div>
+
+                <!-- Fuel type -->
+                <div>
+                    <x-input-label for="fuel_type" :value="ucfirst(__('Fuel type'))" />                    
+                    <select name="fuel_type" class="bg-gray-50 mt-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="diesel" {{ $car->fuel_type == "diesel" ? "selected" : "" }}>{{ucfirst(__("diesel"))}}</option>
+                        <option value="gasoline" {{ $car->fuel_type == "gasoline" ? "selected" : "" }}>{{ucfirst(__("gasoline"))}}</option>
+                        <option value="glp" {{ $car->fuel_type == "glp" ? "selected" : "" }}>{{ucfirst(__("glp"))}}</option>
+                        <option value="electric" {{ $car->fuel_type == "electric" ? "selected" : "" }}>{{ucfirst(__("electric"))}}</option>
+                    </select>                    
+                    @error('fuel_type')
+                    <span class="text-red-600 text-sm">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                </div>
+
             </div>
             <!-- Description -->
             <div class="mt-2">

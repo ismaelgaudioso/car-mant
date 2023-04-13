@@ -11,6 +11,10 @@ class Insurance extends Model
 
     protected $fillable = ["insurance_carrier","insurance_number","phone","coverage","car_id","due_date","price"];
 
+    public function insuracePayments(){
+        return $this->hasMany(InsurancePayment::class);
+    }
+
     public function documents(){
         return $this->belongsToMany(Document::class,'documents_insurances','insurance_id','document_id');
     }

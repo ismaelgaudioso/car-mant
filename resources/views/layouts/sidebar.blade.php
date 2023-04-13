@@ -50,25 +50,25 @@
             </li>
             <li>
                 <x-sidebar-link :href="route('car.index')" :active="request()->routeIs('car.*')">
-                    <i class="fa-solid fa-car fill-current text-gray-600 group-hover:text-cyan-600"></i>
+                    <i class="fa-solid fa-car fill-current group-hover:text-cyan-600"></i>
                     <span class="group-hover:text-gray-700">{{ __('Cars') }}</span>
                 </x-sidebar-link>
             </li>
             <li>
                 <x-sidebar-link :href="route('admin/maintenance.index')" :active="request()->routeIs('admin/maintenance.*')">
-                    <i class="fa-solid fa-screwdriver-wrench fill-current text-gray-600 group-hover:text-cyan-600"></i>
+                    <i class="fa-solid fa-screwdriver-wrench fill-current group-hover:text-cyan-600"></i>
                     <span class="group-hover:text-gray-700">{{ __('Maintenances') }}</span>
                 </x-sidebar-link>
             </li>
             <li>
                 <x-sidebar-link :href="route('admin/insurance.index')" :active="request()->routeIs('admin/insurance.*')">
-                    <i class="fa-solid fa-car-burst fill-current text-gray-600 group-hover:text-cyan-600"></i>
+                    <i class="fa-solid fa-car-burst fill-current group-hover:text-cyan-600"></i>
                     <span class="group-hover:text-gray-700">{{ __('Insurances') }}</span>
                 </x-sidebar-link>
             </li>
             <li>
                 <x-sidebar-link :href="route('user.index')" :active="request()->routeIs('user.*')">
-                    <i class="fa-solid fa-users fill-current text-gray-600 group-hover:text-cyan-600"></i>
+                    <i class="fa-solid fa-users fill-current group-hover:text-cyan-600"></i>
                     <span class="group-hover:text-gray-700">{{ __('Users') }}</span>
                 </x-sidebar-link>
             </li>
