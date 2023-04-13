@@ -18,17 +18,11 @@
                 </x-sidebar-link>
             </li>
             <li>
-                <x-sidebar-link :href="route('maintenance.index')" :active="request()->routeIs('maintenance.*')">
+                <x-sidebar-link :href="route('garage')" :active="request()->routeIs('garage')">
                     <i class="fa-solid fa-screwdriver-wrench fill-current text-gray-600 group-hover:text-cyan-600"></i>
-                    <span class="group-hover:text-gray-700">{{ __('Maintenances') }}</span>
+                    <span class="group-hover:text-gray-700">{{ __('My Garage') }}</span>
                 </x-sidebar-link>
-            </li>
-            <li>
-                <x-sidebar-link :href="route('insurance.index')" :active="request()->routeIs('insurance.*')">
-                    <i class="fa-solid fa-car-burst fill-current text-gray-600 group-hover:text-cyan-600"></i>
-                    <span class="group-hover:text-gray-700">{{ __('Insurances') }}</span>
-                </x-sidebar-link>
-            </li>
+            </li>          
             <li>
                 <x-sidebar-link :href="route('insurance.index')" :active="request()->routeIs('report.*')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

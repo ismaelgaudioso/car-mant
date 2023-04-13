@@ -59,7 +59,7 @@ Route::resource(
 
 
 
-
+Route::get('/garage', [App\Http\Controllers\GarageController::class, 'index'])->middleware(['auth','verified'])->name("garage");
 Route::resource('maintenance', App\Http\Controllers\MaintenanceController::class)->middleware(['auth', 'verified']);
 Route::resource('insurance', App\Http\Controllers\InsuranceController::class)->middleware(['auth', 'verified']);
 
