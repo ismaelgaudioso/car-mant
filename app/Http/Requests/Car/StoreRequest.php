@@ -28,7 +28,8 @@ class StoreRequest extends FormRequest
             "desc" => "required|min:3|max:180",
             "car_license" => "required|min:7|max:10",
             "first_purchase_date" => "required|date",
-            "purchase_date" => "required|date"
+            "purchase_date" => "required|date",
+            "fuel_type" => "required|min:3"
         ];
     }
 }
