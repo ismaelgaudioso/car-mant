@@ -18,7 +18,7 @@
                 </x-sidebar-link>
             </li>
             <li>
-                <x-sidebar-link :href="route('garage')" :active="request()->routeIs('garage')">
+                <x-sidebar-link :href="route('garage')" :active="request()->routeIs('garage.*')">
                     <i class="fa-solid fa-screwdriver-wrench fill-current text-gray-600 group-hover:text-cyan-600"></i>
                     <span class="group-hover:text-gray-700">{{ __('My Garage') }}</span>
                 </x-sidebar-link>
