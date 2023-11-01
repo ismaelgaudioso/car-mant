@@ -17,33 +17,30 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-
-
-
-
 </head>
 
-<body class="h-screen overflow-hidden items-center justify-center" style="background: #edf2f7;">
+<body>
 
-    @include('layouts.sidebar')
 
-    <!-- Content -->
-    <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
 
-        @if(!isset($header)) 
-            {{ $header = "" }}
-        @endif
+    @include('layouts.topbar')
 
-        <!-- Top bar -->
-       @include('layouts.topbar', ["header",$header])       
-        <!-- Container -->
-        <div class="px-6 pt-6 2xl:container">
-            <!-- Panels -->
-            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {{ $slot }}                 
-            </div>
+    <div clasS="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+
+        @include('layouts.sidebar')
+
+        <!-- Content -->
+        <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
+            <main>
+                {{ $slot }}
+            </main>
+
+            @include('layouts.footer')
+
         </div>
+
     </div>
+
 
     @if (isset($scriptjs))
     {{ $scriptjs }}

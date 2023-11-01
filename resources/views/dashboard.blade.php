@@ -1,18 +1,12 @@
 <x-webapp-layout>
 
-        <x-slot name="header">
-                {{ __('Dashboard') }}
-        </x-slot>
+        <div class="p-10">
 
-        <!-- Panel One -->
-        <x-panel span="2">
-                <h1>Prueba Panel 1</h1>
-        </x-panel>
-
-        <!-- Panel Two -->
-        <x-panel>
-                <h1>Prueba Panel 2</h1>
-        </x-panel>
+                <h1 class="text-xl text-weight-bold">{{ __('Dashboard') }}</h1>
+                <p>
+                        Texto de prueba.
+                </p>
+        </div>
 
 
 </x-webapp-layout>
